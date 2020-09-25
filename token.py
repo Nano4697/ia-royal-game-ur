@@ -1,6 +1,6 @@
 class Token:
 
-    def __init__(self):
+    def __init__(self, id):
         self.id = id
         self.pos = 0
 
@@ -10,3 +10,8 @@ class Token:
     def move_pos(self, moves):
         if self.pos < 15:
             self.pos = self.pos + moves
+            if self.pos > 15:
+                self.pos = 15
+
+    def print(self):
+        print("\tToken id:", self.id, "pos:", self.pos)
