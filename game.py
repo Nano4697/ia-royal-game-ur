@@ -46,7 +46,7 @@ class Game:
         pass
 
     def move_token(self, id, moves):
-        pass
+        self.currentBoard.move_token(id, moves)
 
     def next_turn(self):
         if self.currentTurn == "Black":
@@ -65,12 +65,21 @@ class Game:
         self.start_new_game(firstPlayer)
 
         turns = 0
-        while not self.hasFinished and turns < 10:
-            print("turn:", turns, self.currentTurn)
-            if turns == 5:
+        while not self.hasFinished and turns < 100:
+            if turns % 5 == 0:
                 self.repeatTurn = True
+
+            if self.currentTurn == "Black":
+                self.move_token((turns % 7) + 7, turns % 4+1)
+            else:
+                self.move_token(turns % 7, turns % 4+1)
+
             self.next_turn()
             turns += 1
+
+            self.hasFinished, winner = self.currentBoard.check_win_condition()
+            self.print_board()
+        print("Winner is:", winner)
 
 
 def main():

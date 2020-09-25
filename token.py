@@ -13,5 +13,8 @@ class Token:
             if self.pos > 15:
                 self.pos = 15
 
+    def get_pos(self):
+        return self.pos
+
     def print(self):
         print("\tToken id:", self.id, "pos:", self.pos)
