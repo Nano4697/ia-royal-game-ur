@@ -35,14 +35,13 @@ class Board:
             if not hasWin:
                 break
 
-        return hasWin, "White"
+        if hasWin:
+            return hasWin, "White"
+        else:
+            return hasWin, "None"
 
     def exists_token_pos(self):
         return True
-
-    def print_tokens(self, tokens):
-        for token in tokens:
-            token.print()
 
     def move_token(self, id, moves):
         if id > 6:
@@ -50,7 +49,11 @@ class Board:
         else:
             token = self.wTokens[id]
 
-        token.move_pos(moves)
+        return token.move_pos(moves)
+
+    def print_tokens(self, tokens):
+        for token in tokens:
+            token.print()
 
     def print_board(self):
         print("White tokens:")

@@ -13,6 +13,8 @@ class Token:
             if self.pos > 15:
                 self.pos = 15
 
+        return self.pos
+
     def get_pos(self):
         return self.pos
 
