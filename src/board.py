@@ -41,8 +41,19 @@ class Board:
         # if no token was found in that position
         return -1
 
-    def exists_token_pos(self):
-        return True
+    # returns true if it finds a white token in the given position, false otherwise
+    def isPosOccWhite(self, pos):
+        for i in range(0, 7):
+            if wTokens[i] == pos:
+                return True
+        return False
+
+    # returns true if it finds a black token in the given position, false otherwise
+    def isPosOccBlack(self):
+        for i in range(0, 7):
+            if bTokens[i] == pos:
+                return True
+        return False
 
     def move_token(self, id, moves):
         if id > 6:

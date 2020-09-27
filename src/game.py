@@ -37,9 +37,29 @@ class Game:
     def redraw_ui(self):
         pass
 
+    # returns array of token ids that can be moved on the board, and will
+    # have 10 if there are tokens available to move into the board
     def calculate_possible_moves(self):
-        tokens = []
-        return tokens
+        moves = []
+        playerTokens = self.currentBoard.wTokens
+        addedToken = False
+
+        # checks if position 0 + dice roll is ocuppied by another player token
+        canAddBoardToken = !(self.currentBoard.isPosOccWhite(diceRollResult))
+
+        # for each of the player tokens
+        for token_id in range(0, 7):
+            token_pos = playerTokens[token_id]
+
+            if token_pos == 0 and !(addedToken) and canAddBoardToken:
+                addedToken = True
+                moves.append(10)  # add 10 to signify new move only once
+            # if the token is in the board
+            elif token_pos != 0 and token_pos != 15:
+                new_pos = token_pos+diceRollResult
+                if new_pos <= 15 and !(self.currentBoard.isPosOccWhite(new_pos)):
+                    moves.append(token_id)
+        self.possibleMoves = moves
 
     def ai_turn(self, board):
         pass
