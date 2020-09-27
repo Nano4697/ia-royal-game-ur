@@ -1,17 +1,11 @@
-from token import Token
+# from token import Token
 
 
 class Board:
 
     def __init__(self):
-        self.wTokens = []
-        self.bTokens = []
-
-        for id in range(7):
-            self.wTokens.append(Token(id))
-
-        for id in range(7, 14):
-            self.bTokens.append(Token(id))
+        self.wTokens = [0, 0, 0, 0, 0, 0, 0]
+        self.bTokens = [0, 0, 0, 0, 0, 0, 0]
 
     def check_win_condition(self):
         hasWin = True
@@ -39,6 +33,13 @@ class Board:
             return hasWin, "White"
         else:
             return hasWin, "None"
+
+    def getTokenID(self, pos):
+        for i in range(0, 7):
+            if self.wTokens[i] == pos:
+                return i
+        # if no token was found in that position
+        return -1
 
     def exists_token_pos(self):
         return True

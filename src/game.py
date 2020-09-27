@@ -32,6 +32,7 @@ class Game:
                        [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [0, 7], [0, 6], [0, 5]]
         self.B_PATH = [[0, 4], [2, 3], [2, 2], [2, 1], [2, 0], [1, 0], [1, 1],
                        [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 7], [2, 6], [0, 5]]
+        self.start_new_game()
 
     def redraw_ui(self):
         pass
@@ -145,11 +146,11 @@ class Game:
         print("Winner is:", winner)
 
 
-def main():
-    game = Game()
+# def main():
+#     game = Game()
 
-    game.game()
+#     game.game()
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main.ui'
+# Form generated from reading UI file 'main.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.1
+# Created by: Qt User Interface Compiler version 5.15.1
 ##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
+# WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
 from PySide2.QtCore import *
@@ -15,7 +15,9 @@ from PySide2.QtWidgets import *
 import Images_rc
 import Images_rc
 
+
 class Ui_MainWindow(object):
+
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
@@ -33,7 +35,8 @@ class Ui_MainWindow(object):
         self.lblGameboard.setGeometry(QRect(30, 230, 1001, 361))
         self.lblGameboard.setCursor(QCursor(Qt.ArrowCursor))
         self.lblGameboard.setStyleSheet(u"border-color: rgb(0, 0, 0);")
-        self.lblGameboard.setPixmap(QPixmap(u":/Gameboard/Images/game20of20ur.png"))
+        self.lblGameboard.setPixmap(
+            QPixmap(u":/Gameboard/Images/game20of20ur.png"))
         self.lblGameboard.setScaledContents(True)
         self.btnWhite1 = QPushButton(self.GameBoard)
         self.btnWhite1.setObjectName(u"btnWhite1")
@@ -43,9 +46,11 @@ class Ui_MainWindow(object):
         self.btnWhite1.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnWhite1.setAcceptDrops(False)
         self.btnWhite1.setAutoFillBackground(False)
-        self.btnWhite1.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnWhite1.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon = QIcon()
-        icon.addFile(u":/Gameboard/Images/Blancas1.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/Gameboard/Images/Blancas1.png",
+                     QSize(), QIcon.Normal, QIcon.Off)
         self.btnWhite1.setIcon(icon)
         self.btnWhite1.setIconSize(QSize(75, 80))
         self.btnWhite2 = QPushButton(self.GameBoard)
@@ -56,9 +61,11 @@ class Ui_MainWindow(object):
         self.btnWhite2.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnWhite2.setAcceptDrops(False)
         self.btnWhite2.setAutoFillBackground(False)
-        self.btnWhite2.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnWhite2.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon1 = QIcon()
-        icon1.addFile(u":/Gameboard/Images/Blancas2.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u":/Gameboard/Images/Blancas2.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.btnWhite2.setIcon(icon1)
         self.btnWhite2.setIconSize(QSize(75, 80))
         self.btnWhite3 = QPushButton(self.GameBoard)
@@ -69,9 +76,11 @@ class Ui_MainWindow(object):
         self.btnWhite3.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnWhite3.setAcceptDrops(False)
         self.btnWhite3.setAutoFillBackground(False)
-        self.btnWhite3.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnWhite3.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon2 = QIcon()
-        icon2.addFile(u":/Gameboard/Images/Blancas3.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u":/Gameboard/Images/Blancas3.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.btnWhite3.setIcon(icon2)
         self.btnWhite3.setIconSize(QSize(75, 80))
         self.btnWhite4 = QPushButton(self.GameBoard)
@@ -82,9 +91,11 @@ class Ui_MainWindow(object):
         self.btnWhite4.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnWhite4.setAcceptDrops(False)
         self.btnWhite4.setAutoFillBackground(False)
-        self.btnWhite4.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnWhite4.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon3 = QIcon()
-        icon3.addFile(u":/Gameboard/Images/Blancas4.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u":/Gameboard/Images/Blancas4.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.btnWhite4.setIcon(icon3)
         self.btnWhite4.setIconSize(QSize(75, 80))
         self.btnWhite5 = QPushButton(self.GameBoard)
@@ -95,9 +106,11 @@ class Ui_MainWindow(object):
         self.btnWhite5.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnWhite5.setAcceptDrops(False)
         self.btnWhite5.setAutoFillBackground(False)
-        self.btnWhite5.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnWhite5.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon4 = QIcon()
-        icon4.addFile(u":/Gameboard/Images/Blancas5.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon4.addFile(u":/Gameboard/Images/Blancas5.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.btnWhite5.setIcon(icon4)
         self.btnWhite5.setIconSize(QSize(75, 80))
         self.btnWhite6 = QPushButton(self.GameBoard)
@@ -108,9 +121,11 @@ class Ui_MainWindow(object):
         self.btnWhite6.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnWhite6.setAcceptDrops(False)
         self.btnWhite6.setAutoFillBackground(False)
-        self.btnWhite6.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnWhite6.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon5 = QIcon()
-        icon5.addFile(u":/Gameboard/Images/Blancas6.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon5.addFile(u":/Gameboard/Images/Blancas6.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.btnWhite6.setIcon(icon5)
         self.btnWhite6.setIconSize(QSize(75, 80))
         self.btnWhite7 = QPushButton(self.GameBoard)
@@ -121,9 +136,11 @@ class Ui_MainWindow(object):
         self.btnWhite7.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnWhite7.setAcceptDrops(False)
         self.btnWhite7.setAutoFillBackground(False)
-        self.btnWhite7.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnWhite7.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon6 = QIcon()
-        icon6.addFile(u":/Gameboard/Images/Blancas7.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon6.addFile(u":/Gameboard/Images/Blancas7.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.btnWhite7.setIcon(icon6)
         self.btnWhite7.setIconSize(QSize(75, 80))
         self.btnBlack1 = QPushButton(self.GameBoard)
@@ -134,9 +151,11 @@ class Ui_MainWindow(object):
         self.btnBlack1.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnBlack1.setAcceptDrops(False)
         self.btnBlack1.setAutoFillBackground(False)
-        self.btnBlack1.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnBlack1.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon7 = QIcon()
-        icon7.addFile(u":/Gameboard/Images/Negras1.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon7.addFile(u":/Gameboard/Images/Negras1.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.btnBlack1.setIcon(icon7)
         self.btnBlack1.setIconSize(QSize(75, 80))
         self.btnBlack6 = QPushButton(self.GameBoard)
@@ -147,9 +166,11 @@ class Ui_MainWindow(object):
         self.btnBlack6.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnBlack6.setAcceptDrops(False)
         self.btnBlack6.setAutoFillBackground(False)
-        self.btnBlack6.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnBlack6.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon8 = QIcon()
-        icon8.addFile(u":/Gameboard/Images/Negras6.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon8.addFile(u":/Gameboard/Images/Negras6.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.btnBlack6.setIcon(icon8)
         self.btnBlack6.setIconSize(QSize(75, 80))
         self.btnBlack2 = QPushButton(self.GameBoard)
@@ -160,9 +181,11 @@ class Ui_MainWindow(object):
         self.btnBlack2.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnBlack2.setAcceptDrops(False)
         self.btnBlack2.setAutoFillBackground(False)
-        self.btnBlack2.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnBlack2.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon9 = QIcon()
-        icon9.addFile(u":/Gameboard/Images/Negras2.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon9.addFile(u":/Gameboard/Images/Negras2.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.btnBlack2.setIcon(icon9)
         self.btnBlack2.setIconSize(QSize(75, 80))
         self.btnBlack7 = QPushButton(self.GameBoard)
@@ -173,9 +196,11 @@ class Ui_MainWindow(object):
         self.btnBlack7.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnBlack7.setAcceptDrops(False)
         self.btnBlack7.setAutoFillBackground(False)
-        self.btnBlack7.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnBlack7.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon10 = QIcon()
-        icon10.addFile(u":/Gameboard/Images/Negras7.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon10.addFile(u":/Gameboard/Images/Negras7.png",
+                       QSize(), QIcon.Normal, QIcon.Off)
         self.btnBlack7.setIcon(icon10)
         self.btnBlack7.setIconSize(QSize(75, 80))
         self.btnBlack3 = QPushButton(self.GameBoard)
@@ -186,9 +211,11 @@ class Ui_MainWindow(object):
         self.btnBlack3.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnBlack3.setAcceptDrops(False)
         self.btnBlack3.setAutoFillBackground(False)
-        self.btnBlack3.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnBlack3.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon11 = QIcon()
-        icon11.addFile(u":/Gameboard/Images/Negras3.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon11.addFile(u":/Gameboard/Images/Negras3.png",
+                       QSize(), QIcon.Normal, QIcon.Off)
         self.btnBlack3.setIcon(icon11)
         self.btnBlack3.setIconSize(QSize(75, 80))
         self.btnBlack4 = QPushButton(self.GameBoard)
@@ -199,9 +226,11 @@ class Ui_MainWindow(object):
         self.btnBlack4.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnBlack4.setAcceptDrops(False)
         self.btnBlack4.setAutoFillBackground(False)
-        self.btnBlack4.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnBlack4.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon12 = QIcon()
-        icon12.addFile(u":/Gameboard/Images/Negras4.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon12.addFile(u":/Gameboard/Images/Negras4.png",
+                       QSize(), QIcon.Normal, QIcon.Off)
         self.btnBlack4.setIcon(icon12)
         self.btnBlack4.setIconSize(QSize(75, 80))
         self.btnBlack5 = QPushButton(self.GameBoard)
@@ -212,9 +241,11 @@ class Ui_MainWindow(object):
         self.btnBlack5.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.btnBlack5.setAcceptDrops(False)
         self.btnBlack5.setAutoFillBackground(False)
-        self.btnBlack5.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);")
+        self.btnBlack5.setStyleSheet(
+            u"background-color: rgba(255, 255, 255, 50);")
         icon13 = QIcon()
-        icon13.addFile(u":/Gameboard/Images/Negras5.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon13.addFile(u":/Gameboard/Images/Negras5.png",
+                       QSize(), QIcon.Normal, QIcon.Off)
         self.btnBlack5.setIcon(icon13)
         self.btnBlack5.setIconSize(QSize(75, 80))
         self.lblDice1 = QLabel(self.GameBoard)
@@ -245,7 +276,7 @@ class Ui_MainWindow(object):
         self.btn23.setAcceptDrops(False)
         self.btn23.setAutoFillBackground(False)
         self.btn23.setStyleSheet(u"background-color: rgba(255, 255, 255, 5);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn23.setIconSize(QSize(75, 80))
         self.btn22 = QPushButton(self.GameBoard)
         self.btn22.setObjectName(u"btn22")
@@ -256,7 +287,7 @@ class Ui_MainWindow(object):
         self.btn22.setAcceptDrops(False)
         self.btn22.setAutoFillBackground(False)
         self.btn22.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn22.setIconSize(QSize(75, 80))
         self.btn11 = QPushButton(self.GameBoard)
         self.btn11.setObjectName(u"btn11")
@@ -267,7 +298,7 @@ class Ui_MainWindow(object):
         self.btn11.setAcceptDrops(False)
         self.btn11.setAutoFillBackground(False)
         self.btn11.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn11.setIconSize(QSize(75, 80))
         self.btn12 = QPushButton(self.GameBoard)
         self.btn12.setObjectName(u"btn12")
@@ -278,7 +309,7 @@ class Ui_MainWindow(object):
         self.btn12.setAcceptDrops(False)
         self.btn12.setAutoFillBackground(False)
         self.btn12.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn12.setIconSize(QSize(75, 80))
         self.btn00 = QPushButton(self.GameBoard)
         self.btn00.setObjectName(u"btn00")
@@ -289,7 +320,7 @@ class Ui_MainWindow(object):
         self.btn00.setAcceptDrops(False)
         self.btn00.setAutoFillBackground(False)
         self.btn00.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn00.setIconSize(QSize(75, 80))
         self.btn01 = QPushButton(self.GameBoard)
         self.btn01.setObjectName(u"btn01")
@@ -300,7 +331,7 @@ class Ui_MainWindow(object):
         self.btn01.setAcceptDrops(False)
         self.btn01.setAutoFillBackground(False)
         self.btn01.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn01.setIconSize(QSize(75, 80))
         self.btn02 = QPushButton(self.GameBoard)
         self.btn02.setObjectName(u"btn02")
@@ -311,7 +342,7 @@ class Ui_MainWindow(object):
         self.btn02.setAcceptDrops(False)
         self.btn02.setAutoFillBackground(False)
         self.btn02.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn02.setIconSize(QSize(75, 80))
         self.btn03 = QPushButton(self.GameBoard)
         self.btn03.setObjectName(u"btn03")
@@ -322,7 +353,7 @@ class Ui_MainWindow(object):
         self.btn03.setAcceptDrops(False)
         self.btn03.setAutoFillBackground(False)
         self.btn03.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn03.setIconSize(QSize(75, 80))
         self.btn06 = QPushButton(self.GameBoard)
         self.btn06.setObjectName(u"btn06")
@@ -333,7 +364,7 @@ class Ui_MainWindow(object):
         self.btn06.setAcceptDrops(False)
         self.btn06.setAutoFillBackground(False)
         self.btn06.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn06.setIconSize(QSize(75, 80))
         self.btn07 = QPushButton(self.GameBoard)
         self.btn07.setObjectName(u"btn07")
@@ -344,7 +375,7 @@ class Ui_MainWindow(object):
         self.btn07.setAcceptDrops(False)
         self.btn07.setAutoFillBackground(False)
         self.btn07.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn07.setIconSize(QSize(75, 80))
         self.btn10 = QPushButton(self.GameBoard)
         self.btn10.setObjectName(u"btn10")
@@ -355,7 +386,7 @@ class Ui_MainWindow(object):
         self.btn10.setAcceptDrops(False)
         self.btn10.setAutoFillBackground(False)
         self.btn10.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn10.setIconSize(QSize(75, 80))
         self.btn13 = QPushButton(self.GameBoard)
         self.btn13.setObjectName(u"btn13")
@@ -366,7 +397,7 @@ class Ui_MainWindow(object):
         self.btn13.setAcceptDrops(False)
         self.btn13.setAutoFillBackground(False)
         self.btn13.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn13.setIconSize(QSize(75, 80))
         self.btn20 = QPushButton(self.GameBoard)
         self.btn20.setObjectName(u"btn20")
@@ -377,7 +408,7 @@ class Ui_MainWindow(object):
         self.btn20.setAcceptDrops(False)
         self.btn20.setAutoFillBackground(False)
         self.btn20.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn20.setIconSize(QSize(75, 80))
         self.btn21 = QPushButton(self.GameBoard)
         self.btn21.setObjectName(u"btn21")
@@ -388,7 +419,7 @@ class Ui_MainWindow(object):
         self.btn21.setAcceptDrops(False)
         self.btn21.setAutoFillBackground(False)
         self.btn21.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn21.setIconSize(QSize(75, 80))
         self.btn14 = QPushButton(self.GameBoard)
         self.btn14.setObjectName(u"btn14")
@@ -399,7 +430,7 @@ class Ui_MainWindow(object):
         self.btn14.setAcceptDrops(False)
         self.btn14.setAutoFillBackground(False)
         self.btn14.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn14.setIconSize(QSize(75, 80))
         self.btn15 = QPushButton(self.GameBoard)
         self.btn15.setObjectName(u"btn15")
@@ -410,7 +441,7 @@ class Ui_MainWindow(object):
         self.btn15.setAcceptDrops(False)
         self.btn15.setAutoFillBackground(False)
         self.btn15.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn15.setIconSize(QSize(75, 80))
         self.btn16 = QPushButton(self.GameBoard)
         self.btn16.setObjectName(u"btn16")
@@ -421,7 +452,7 @@ class Ui_MainWindow(object):
         self.btn16.setAcceptDrops(False)
         self.btn16.setAutoFillBackground(False)
         self.btn16.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn16.setIconSize(QSize(75, 80))
         self.btn17 = QPushButton(self.GameBoard)
         self.btn17.setObjectName(u"btn17")
@@ -432,8 +463,8 @@ class Ui_MainWindow(object):
         self.btn17.setAcceptDrops(False)
         self.btn17.setAutoFillBackground(False)
         self.btn17.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(0, 0, 0);\n"
-"")
+                                 "border-color: rgb(0, 0, 0);\n"
+                                 "")
         self.btn17.setIconSize(QSize(75, 80))
         self.btn26 = QPushButton(self.GameBoard)
         self.btn26.setObjectName(u"btn26")
@@ -444,7 +475,7 @@ class Ui_MainWindow(object):
         self.btn26.setAcceptDrops(False)
         self.btn26.setAutoFillBackground(False)
         self.btn26.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn26.setIconSize(QSize(75, 80))
         self.btn27 = QPushButton(self.GameBoard)
         self.btn27.setObjectName(u"btn27")
@@ -455,7 +486,7 @@ class Ui_MainWindow(object):
         self.btn27.setAcceptDrops(False)
         self.btn27.setAutoFillBackground(False)
         self.btn27.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
-"border-color: rgb(255, 0, 0);")
+                                 "border-color: rgb(255, 0, 0);")
         self.btn27.setIconSize(QSize(75, 80))
         self.lblDice2 = QLabel(self.GameBoard)
         self.lblDice2.setObjectName(u"lblDice2")
@@ -492,8 +523,10 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.GameBoard.setTitle(QCoreApplication.translate("MainWindow", u"Gameboard", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate(
+            "MainWindow", u"MainWindow", None))
+        self.GameBoard.setTitle(QCoreApplication.translate(
+            "MainWindow", u"Gameboard", None))
         self.lblGameboard.setText("")
         self.btnWhite1.setText("")
         self.btnWhite2.setText("")
@@ -509,9 +542,12 @@ class Ui_MainWindow(object):
         self.btnBlack3.setText("")
         self.btnBlack4.setText("")
         self.btnBlack5.setText("")
-        self.lblDice1.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.btnRollDice.setText(QCoreApplication.translate("MainWindow", u"Roll Dice", None))
-        self.btnNewGame.setText(QCoreApplication.translate("MainWindow", u"New Game", None))
+        self.lblDice1.setText(
+            QCoreApplication.translate("MainWindow", u"0", None))
+        self.btnRollDice.setText(QCoreApplication.translate(
+            "MainWindow", u"Roll Dice", None))
+        self.btnNewGame.setText(QCoreApplication.translate(
+            "MainWindow", u"New Game", None))
         self.btn23.setText("")
         self.btn22.setText("")
         self.btn11.setText("")
@@ -532,10 +568,14 @@ class Ui_MainWindow(object):
         self.btn17.setText("")
         self.btn26.setText("")
         self.btn27.setText("")
-        self.lblDice2.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.lblDice3.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.lblTotalDice.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.lblTotal.setText(QCoreApplication.translate("MainWindow", u"Total:", None))
-        self.lblTurn.setText(QCoreApplication.translate("MainWindow", u"Turn of:", None))
+        self.lblDice2.setText(
+            QCoreApplication.translate("MainWindow", u"0", None))
+        self.lblDice3.setText(
+            QCoreApplication.translate("MainWindow", u"0", None))
+        self.lblTotalDice.setText(
+            QCoreApplication.translate("MainWindow", u"0", None))
+        self.lblTotal.setText(QCoreApplication.translate(
+            "MainWindow", u"Total:", None))
+        self.lblTurn.setText(QCoreApplication.translate(
+            "MainWindow", u"Turn of:", None))
     # retranslateUi
-
