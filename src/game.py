@@ -46,7 +46,8 @@ class Game:
         addedToken = False
 
         # checks if position 0 + dice roll is ocuppied by another player token
-        canAddBoardToken = not (self.currentBoard.isPosOccWhite(diceRollResult))
+        canAddBoardToken = not (
+            self.currentBoard.isPosOccWhite(self.diceRollResult))
 
         # for each of the player tokens
         for token_id in range(0, 7):
@@ -57,7 +58,7 @@ class Game:
                 moves.append(10)  # add 10 to signify new move only once
             # if the token is in the board
             elif token_pos != 0 and token_pos != 15:
-                new_pos = token_pos+diceRollResult
+                new_pos = token_pos+self.diceRollResult
                 if new_pos <= 15 and not (self.currentBoard.isPosOccWhite(new_pos)):
                     moves.append(token_id)
         self.possibleMoves = moves
@@ -88,8 +89,13 @@ class Game:
         elif randomValue < 1000:
             return 2
 
-    def move_token(self, id, moves):
-        resultPos = self.currentBoard.move_token(id, moves)
+    def move_token_white(self, id, moves):
+        resultPos = self.currentBoard.move_token_white(id, moves)
+
+        return resultPos
+
+    def move_token_black(self, id, moves):
+        resultPos = self.currentBoard.move_token_black(id, moves)
 
         return resultPos
 
@@ -132,7 +138,8 @@ class Game:
                 self.repeatTurn = False
                 self.next_state()
 
-                newPos = self.currentBoard.move_token_white((turns % 7), self.dice)
+                newPos = self.currentBoard.move_token_white(
+                    (turns % 7), self.dice)
 
                 if newPos in self.ROSETTES:
                     self.repeatTurn = True
@@ -149,7 +156,8 @@ class Game:
             # ---------------- AI MOVE --------------
             while self.repeatTurn:
                 self.repeatTurn = False
-                newPos = self.currentBoard.move_token_black((turns % 7), self.dice)
+                newPos = self.currentBoard.move_token_black(
+                    (turns % 7), self.dice)
 
                 if newPos in self.ROSETTES:
                     self.repeatTurn = True

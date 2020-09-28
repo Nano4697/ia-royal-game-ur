@@ -44,22 +44,26 @@ class Board:
     # returns true if it finds a white token in the given position, false otherwise
     def isPosOccWhite(self, pos):
         for i in range(0, 7):
-            if wTokens[i] == pos:
+            if self.wTokens[i] == pos:
                 return True
         return False
 
     # returns true if it finds a black token in the given position, false otherwise
-    def isPosOccBlack(self):
+    def isPosOccBlack(self, pos):
         for i in range(0, 7):
-            if bTokens[i] == pos:
+            if self.bTokens[i] == pos:
                 return True
         return False
 
     def move_token_white(self, id, moves):
         self.wTokens[id] += moves
 
+        return self.wTokens[id]
+
     def move_token_black(self, id, moves):
         self.bTokens[id] += moves
+
+        return self.bTokens[id]
 
     def print_tokens(self, tokens):
         for token in tokens:
