@@ -1,15 +1,31 @@
 from PySide2 import QtWidgets
 
-from UI import main
+from UI import mainWindow
 
-class GameBoard(main.Ui_MainWindow, QtWidgets.QMainWindow):
+import game
+
+
+class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
+
+    button_names = [["btn00", "btn01", "btn02", "btn03", "new", "out", "btn06", "btn07"],
+                    ["btn10", "btn11", "btn12", "btn13",
+                        "btn14", "btn15", "btn16", "btn17"],
+                    ["btn20", "btn21", "btn22", "btn23", "new", "out", "btn26", "btn27"]]
+
+    button_pos = {
+        "btn20": 4, "btn21": 3, "btn22": 2, "btn23": 1, "btn10": 5, "btn11": 6, "btn12": 7, "btn13": 8,
+        "btn14": 9, "btn15": 10, "btn16": 11, "btn17": 12, "btn26": 14, "btn27": 13
+    }
+
     def __init__(self):
         super(GameBoard, self).__init__()
+        self.currentGame = game.Game()
         self.setupUi(self)
         self.deactivateAll()
         self.btnNewGame.clicked.connect(self.newGame)
         self.btnRollDice.clicked.connect(self.diceRolled)
         self.btnWhite1.clicked.connect(self.movement)
+        # self.findChild(QPushButton,)
 
     def deactivateAll(self):
         self.btnBlack1.setEnabled(False)
@@ -127,16 +143,33 @@ class GameBoard(main.Ui_MainWindow, QtWidgets.QMainWindow):
 
         self.btn23.setStyleSheet(u"background-color: rgba(255, 0, 0, 50);")
 
+    # returns the button instance for the given coordinate
+    def getButtonByCoord(self, row, column):
+        if 0 > row > 6:
+            # error
+            return null
+        if row == 0 and column == 5:
+            # new token
+            return "NEW_TOKEN"
+        if row == 0 and column == 6:
+            # token out of board
+            return "OUT_TOKEN"
+        # return button by name
+
+        return self.GameBoard.findChild(mainWindow.QPushButton, self.button_names[row][column])
+
+    # returns the id of the token corresponding to the pressed button name, returns -1
+    # if no token was found in the position the button was pressed
+    def getTokenIdbyBtnName(self, btnName):
+        pos = self.button_pos[btnName]
+        return self.currentGame.currentBoard.getTokenID(pos)
 
 
-
-
-
-
-
-
-if __name__=='__main__':
+if __name__ == '__main__':
     app = QtWidgets.QApplication()
     qt_app = GameBoard()
+    btn = qt_app.getButtonByCoord(0, 0)
+    btn.setStyleSheet(u"background-color: rgba(255, 0, 0, 50);")
+    print(qt_app.getTokenIdbyBtnName("btn20"))
     qt_app.show()
     app.exec_()

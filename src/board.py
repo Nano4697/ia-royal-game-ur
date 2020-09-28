@@ -1,11 +1,11 @@
-from token import Token
+# from token import Token
 
 
 class Board:
 
     def __init__(self):
-        self.wTokens = [0,0,0,0,0,0,0]
-        self.bTokens = [0,0,0,0,0,0,0]
+        self.wTokens = [0, 0, 0, 0, 0, 0, 0]
+        self.bTokens = [0, 0, 0, 0, 0, 0, 0]
 
     def check_win_condition(self):
         hasWin = True
@@ -34,8 +34,26 @@ class Board:
         else:
             return hasWin, "None"
 
-    def exists_token_pos(self):
-        return True
+    def getTokenID(self, pos):
+        for i in range(0, 7):
+            if self.wTokens[i] == pos:
+                return i
+        # if no token was found in that position
+        return -1
+
+    # returns true if it finds a white token in the given position, false otherwise
+    def isPosOccWhite(self, pos):
+        for i in range(0, 7):
+            if wTokens[i] == pos:
+                return True
+        return False
+
+    # returns true if it finds a black token in the given position, false otherwise
+    def isPosOccBlack(self):
+        for i in range(0, 7):
+            if bTokens[i] == pos:
+                return True
+        return False
 
     def move_token_white(self, id, moves):
         self.wTokens[id] += moves

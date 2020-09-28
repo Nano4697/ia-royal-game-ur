@@ -33,13 +33,34 @@ class Game:
                        [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [0, 7], [0, 6], [0, 5]]
         self.B_PATH = [[0, 4], [2, 3], [2, 2], [2, 1], [2, 0], [1, 0], [1, 1],
                        [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 7], [2, 6], [0, 5]]
+        self.start_new_game()
 
     def redraw_ui(self):
         pass
 
+    # returns array of token ids that can be moved on the board, and will
+    # have 10 if there are tokens available to move into the board
     def calculate_possible_moves(self):
-        tokens = []
-        return tokens
+        moves = []
+        playerTokens = self.currentBoard.wTokens
+        addedToken = False
+
+        # checks if position 0 + dice roll is ocuppied by another player token
+        canAddBoardToken = not (self.currentBoard.isPosOccWhite(diceRollResult))
+
+        # for each of the player tokens
+        for token_id in range(0, 7):
+            token_pos = playerTokens[token_id]
+
+            if token_pos == 0 and not (addedToken) and canAddBoardToken:
+                addedToken = True
+                moves.append(10)  # add 10 to signify new move only once
+            # if the token is in the board
+            elif token_pos != 0 and token_pos != 15:
+                new_pos = token_pos+diceRollResult
+                if new_pos <= 15 and not (self.currentBoard.isPosOccWhite(new_pos)):
+                    moves.append(token_id)
+        self.possibleMoves = moves
 
     def ai_turn(self, board):
         pass
@@ -146,11 +167,11 @@ class Game:
         print("Winner is:", winner)
 
 
-def main():
-    game = Game()
+# def main():
+#     game = Game()
 
-    game.game()
+#     game.game()
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
