@@ -1,0 +1,19 @@
+<RCC>
+  <qresource prefix="Gameboard">
+    <file>Images/Blancas1.png</file>
+    <file>Images/Blancas2.png</file>
+    <file>Images/Blancas3.png</file>
+    <file>Images/Blancas4.png</file>
+    <file>Images/Blancas5.png</file>
+    <file>Images/Blancas6.png</file>
+    <file>Images/Blancas7.png</file>
+    <file>Images/game20of20ur.png</file>
+    <file>Images/Negras1.png</file>
+    <file>Images/Negras2.png</file>
+    <file>Images/Negras3.png</file>
+    <file>Images/Negras4.png</file>
+    <file>Images/Negras5.png</file>
+    <file>Images/Negras6.png</file>
+    <file>Images/Negras7.png</file>
+  </qresource>
+</RCC>
