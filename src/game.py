@@ -24,6 +24,7 @@ class Game:
         self.possibleMoves = []
         self.hasFinished = False
         self.repeatTurn = False
+        self.dice = 0
 
     def __init__(self):
         self.ROSETTES = [4, 8, 14]
@@ -62,7 +63,7 @@ class Game:
             return 4
 
         # check if result == 2
-        # probability of getting it = 3/8 -> 37.5 -> [625,99[
+        # probability of getting it = 3/8 -> 37.5 -> [625,999[
         elif randomValue < 1000:
             return 2
 
@@ -102,7 +103,7 @@ class Game:
             # ---------------- ROLL DICE -------------
             input("Press Enter to roll dice...")
             self.restart_state()
-            dice = self.roll_dice()
+            self.dice = self.roll_dice()
 
             self.repeatTurn = True
             # ---------------- PLAYER MOVE --------------
@@ -110,14 +111,14 @@ class Game:
                 self.repeatTurn = False
                 self.next_state()
 
-                newPos = self.move_token(turns % 7, dice)
+                newPos = self.currentBoard.move_token_white((turns % 7), self.dice)
 
                 if newPos in self.ROSETTES:
                     self.repeatTurn = True
 
                     self.restart_state()
                     input("Press Enter to roll dice...")
-                    dice = self.roll_dice()
+                    self.dice = self.roll_dice()
 
             self.next_turn()
             self.next_state()
@@ -127,11 +128,11 @@ class Game:
             # ---------------- AI MOVE --------------
             while self.repeatTurn:
                 self.repeatTurn = False
-                newPos = self.move_token((turns % 7) + 7, dice)
+                newPos = self.currentBoard.move_token_black((turns % 7), self.dice)
 
                 if newPos in self.ROSETTES:
                     self.repeatTurn = True
-                    dice = self.roll_dice()
+                    self.dice = self.roll_dice()
 
             if turns == 100:
                 self.start_new_game(self.currentTurn)
