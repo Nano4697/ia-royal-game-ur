@@ -2,7 +2,7 @@ from PySide2 import QtWidgets
 
 from UI import mainWindow
 
-import game
+from game import *
 
 
 class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
@@ -19,12 +19,13 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
 
     def __init__(self):
         super(GameBoard, self).__init__()
-        self.currentGame = game.Game()
+        self.currentGame = Game()
         self.setupUi(self)
         self.deactivateAll()
         self.btnNewGame.clicked.connect(self.newGame)
         self.btnRollDice.clicked.connect(self.diceRolled)
         self.btnWhite1.clicked.connect(self.movement)
+        self.lastClickedButton = ""
         # self.findChild(QPushButton,)
 
     def deactivateAll(self):
@@ -72,6 +73,122 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.lblDice2.setText("0")
         self.lblDice3.setText("0")
 
+    def new_token_buttons_enabled(self, enable):
+        self.btnWhite1.setEnabled(enable)
+        self.btnWhite2.setEnabled(enable)
+        self.btnWhite3.setEnabled(enable)
+        self.btnWhite4.setEnabled(enable)
+        self.btnWhite5.setEnabled(enable)
+        self.btnWhite6.setEnabled(enable)
+        self.btnWhite7.setEnabled(enable)
+
+    def deactivate_board_buttons(self):
+        self.btn10.setEnabled(False)
+        self.btn11.setEnabled(False)
+        self.btn12.setEnabled(False)
+        self.btn13.setEnabled(False)
+        self.btn14.setEnabled(False)
+        self.btn15.setEnabled(False)
+        self.btn16.setEnabled(False)
+        self.btn17.setEnabled(False)
+
+        self.btn20.setEnabled(False)
+        self.btn21.setEnabled(False)
+        self.btn22.setEnabled(False)
+        self.btn23.setEnabled(False)
+        self.btn26.setEnabled(False)
+        self.btn27.setEnabled(False)
+
+    def activate_posible_moves(self):
+        # deactivate all buttons first
+        self.deactivate_board_buttons()
+        self.new_token_buttons_enabled(False)
+
+        # calculate possible moves
+        self.currentGame.calculate_possible_moves()
+
+        for move in self.currentGame.possibleMoves:
+            if move == self.currentGame.ADD_TOKEN_BOARD:
+                self.new_token_buttons_enabled(True)
+            else:
+                token_pos = self.currentGame.currentBoard.wTokens[move]
+                button_coord = self.currentGame.W_PATH[token_pos]
+                button = self.getButtonByCoord(
+                    button_coord[0], button_coord[1])
+
+                # enable and highlight icon somehow
+                button.setEnabled(True)
+                button.setStyleSheet(u"background-color: rgba(100, 0, 255, 50);\n"
+                                     "border-color: rgb(255, 0, 0); \n")
+
+    def highlight_move_landing(self, move):
+        self.clear_higlights()
+
+        if move == self.currentGame.ADD_TOKEN_BOARD:
+            new_pos_coord = self.currentGame.W_PATH[self.currentGame.diceRollResult]
+            button = self.getButtonByCoord(new_pos_coord[0], new_pos_coord[1])
+            button.setStyleSheet(u"background-color: rgba(255, 0, 0, 50);")
+        else:
+            new_pos = self.currentGame.currentBoard.wTokens[move] + \
+                self.currentGame.diceRollResult
+            if new_pos < self.currentGame.END_POSITION:
+                new_pos_coord = self.currentGame.W_PATH[new_pos]
+                button = self.getButtonByCoord(
+                    new_pos_coord[0], new_pos_coord[1])
+                button.setStyleSheet(u"background-color: rgba(255, 0, 0, 50);")
+
+    def clear_higlights(self):
+        self.btn10.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+        self.btn11.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+        self.btn12.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+        self.btn13.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+        self.btn14.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+        self.btn15.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+        self.btn16.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+        self.btn17.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+
+        self.btn20.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+        self.btn21.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+        self.btn22.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+        self.btn23.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+        self.btn26.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+        self.btn27.setStyleSheet(u"background-color: rgba(255, 255, 255, 50);\n"
+                                 "border-color: rgb(255, 0, 0);")
+
+    def drawIcons(self):
+        for token in range(0, 7):
+            wtoken_pos = self.currentGame.currentBoard.wTokens[token]
+            btoken_pos = self.currentGame.currentBoard.bTokens[token]
+            if wtoken_pos == 0 or wtoken_pos == 15:
+                pass
+
+            else:
+
+                wtoken_coord = self.currentGame.W_PATH[wtoken_pos]
+                button = self.getButtonByCoord(
+                    wtoken_coord[0], wtoken_coord[1])
+                button.setIcon(self.white_icon)
+            if btoken_pos == 0 or btoken_pos == 15:
+                pass
+            else:
+                btoken_coord = self.currentGame.B_PATH[btoken_pos]
+                button = self.getButtonByCoord(
+                    btoken_coord[0], btoken_coord[1])
+                button.setIcon(self.black_icon)
+
     def newGame(self):
         self.btnRollDice.setEnabled(True)
         self.lblDice1.setText("0")
@@ -84,6 +201,7 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.btn03.setEnabled(False)
         self.btn06.setEnabled(False)
         self.btn07.setEnabled(False)
+        # self.btn03.setIcon(self.white_icon)
 
         self.btn10.setEnabled(False)
         self.btn11.setEnabled(False)
@@ -108,10 +226,23 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.btnWhite5.setEnabled(False)
         self.btnWhite6.setEnabled(False)
         self.btnWhite7.setEnabled(False)
+        self.clear_higlights()
 
     def diceRolled(self):
+        self.currentGame.roll_dice()
+        self.currentGame.currentTurn = self.currentGame.WHITE_TURN
         self.btnRollDice.setEnabled(False)
 
+        # ###########################test board #####################################
+        self.currentGame.currentBoard.wTokens = [3, 0, 7, 11, 0, 10, 6]
+        self.currentGame.currentBoard.bTokens = [0, 0, 2, 9, 13, 8, 15]
+
+        self.drawIcons()
+        self.activate_posible_moves()
+        print("Dice Roll: ", self.currentGame.diceRollResult)
+        print("Possible Moves: ", self.currentGame.possibleMoves)
+        self.currentGame.currentBoard.print_board()
+        # self.highlight_move_landing(10)
         self.btnWhite1.setEnabled(True)
         self.btnWhite2.setEnabled(True)
         self.btnWhite3.setEnabled(True)
@@ -141,9 +272,10 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.btn26.setEnabled(True)
         self.btn27.setEnabled(True)
 
-        self.btn23.setStyleSheet(u"background-color: rgba(255, 0, 0, 50);")
+        # self.btn23.setStyleSheet(u"background-color: rgba(255, 0, 0, 50);")
 
     # returns the button instance for the given coordinate
+
     def getButtonByCoord(self, row, column):
         if 0 > row > 6:
             # error
@@ -162,14 +294,14 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
     # if no token was found in the position the button was pressed
     def getTokenIdbyBtnName(self, btnName):
         pos = self.button_pos[btnName]
-        return self.currentGame.currentBoard.getTokenID(pos)
+        return self.currentGame.currentBoard.getTokenIDWhite(pos)
 
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication()
     qt_app = GameBoard()
-    btn = qt_app.getButtonByCoord(0, 0)
-    btn.setStyleSheet(u"background-color: rgba(255, 0, 0, 50);")
-    print(qt_app.getTokenIdbyBtnName("btn20"))
+    # btn = qt_app.getButtonByCoord(0, 0)
+    # btn.setStyleSheet(u"background-color: rgba(255, 0, 0, 50);")
+    # print(qt_app.getTokenIdbyBtnName("btn20"))
     qt_app.show()
     app.exec_()

@@ -12,6 +12,17 @@ class States(Enum):
 
 
 class Game:
+    ROSETTES = [4, 8, 14]
+    B_PATH = [[0, 4], [0, 3], [0, 2], [0, 1], [0, 0], [1, 0], [1, 1],
+              [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [0, 7], [0, 6], [0, 5]]
+    W_PATH = [[0, 4], [2, 3], [2, 2], [2, 1], [2, 0], [1, 0], [1, 1],
+              [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 7], [2, 6], [0, 5]]
+    ADD_TOKEN_BOARD = 10
+    START_POSITION = 0
+    END_POSITION = 15
+    WHITE_TURN = "White"
+    BLACK_TURN = "Black"
+
     def start_new_game(self, firstPlayer="Black"):
 
         self.currentTurn = firstPlayer
@@ -24,17 +35,6 @@ class Game:
         self.repeatTurn = False
 
     def __init__(self):
-        self.ROSETTES = [4, 8, 14]
-        self.W_PATH = [[0, 4], [0, 3], [0, 2], [0, 1], [0, 0], [1, 0], [1, 1],
-                       [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [0, 7], [0, 6], [0, 5]]
-        self.B_PATH = [[0, 4], [2, 3], [2, 2], [2, 1], [2, 0], [1, 0], [1, 1],
-                       [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 7], [2, 6], [0, 5]]
-        self.ADD_TOKEN_BOARD = 10
-        self.START_POSITION = 0
-        self.END_POSITION = 15
-        self.WHITE_TURN = "White"
-        self.BLACK_TURN = "Black"
-
         self.currentBoard = Board()
         self.currentTurn = "Black"
         self.currentState = States.DICE_ROLL
@@ -87,21 +87,25 @@ class Game:
         # check if result == 1
         # probability of getting it = 3/8 -> 37.5 -> [0,375[
         if 0 <= randomValue < 375:
+            self.diceRollResult = 1
             return 1
 
         # check if result == 3
         # probability of getting it = 1/8 -> 12.5 -> [375,500[
         elif 375 <= randomValue < 500:
+            self.diceRollResult = 3
             return 3
 
         # check if result == 4
         # probability of getting it = 1/8 -> 12.5 -> [500,625[
         elif 500 <= randomValue < 625:
+            self.diceRollResult = 4
             return 4
 
         # check if result == 2
         # probability of getting it = 3/8 -> 37.5 -> [625,99[
         elif randomValue < 1000:
+            self.diceRollResult = 2
             return 2
 
     # receives one of the values of possibleMoves[] and makes the change which is the id of the

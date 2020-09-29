@@ -48,10 +48,10 @@ class Ui_MainWindow(object):
         self.btnWhite1.setAutoFillBackground(False)
         self.btnWhite1.setStyleSheet(
             u"background-color: rgba(255, 255, 255, 50);")
-        icon = QIcon()
-        icon.addFile(u":/Gameboard/Images/Blancas1.png",
-                     QSize(), QIcon.Normal, QIcon.Off)
-        self.btnWhite1.setIcon(icon)
+        self.white_icon = QIcon()
+        self.white_icon.addFile(u":/Gameboard/Images/Blancas1.png",
+                                QSize(), QIcon.Normal, QIcon.Off)
+        self.btnWhite1.setIcon(self.white_icon)
         self.btnWhite1.setIconSize(QSize(75, 80))
         self.btnWhite2 = QPushButton(self.GameBoard)
         self.btnWhite2.setObjectName(u"btnWhite2")
@@ -153,10 +153,10 @@ class Ui_MainWindow(object):
         self.btnBlack1.setAutoFillBackground(False)
         self.btnBlack1.setStyleSheet(
             u"background-color: rgba(255, 255, 255, 50);")
-        icon7 = QIcon()
-        icon7.addFile(u":/Gameboard/Images/Negras1.png",
-                      QSize(), QIcon.Normal, QIcon.Off)
-        self.btnBlack1.setIcon(icon7)
+        self.black_icon = QIcon()
+        self.black_icon.addFile(u":/Gameboard/Images/Negras1.png",
+                                QSize(), QIcon.Normal, QIcon.Off)
+        self.btnBlack1.setIcon(self.black_icon)
         self.btnBlack1.setIconSize(QSize(75, 80))
         self.btnBlack6 = QPushButton(self.GameBoard)
         self.btnBlack6.setObjectName(u"btnBlack6")
