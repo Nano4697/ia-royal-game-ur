@@ -55,19 +55,20 @@ class Game:
         addedNewToken = False
 
         # checks if position 0 + dice roll is ocuppied by another player token
-        canAddBoardToken = !(self.currentBoard.isPosOccWhite(diceRollResult))
+        canAddBoardToken = not self.currentBoard.isPosOccWhite(
+            self.diceRollResult)
 
         # for each of the player tokens
         for token_id in range(0, 7):
             token_pos = playerTokens[token_id]
-            if token_pos == self.START_POSITION and !(addedNewToken) and canAddBoardToken:
-                addedToken = True
+            if token_pos == self.START_POSITION and not addedNewToken and canAddBoardToken:
+                addedNewToken = True
                 # add code to signify new token can be adde to board only once
-                moves.append(ADD_TOKEN_BOARD)
+                moves.append(self.ADD_TOKEN_BOARD)
             # if the token is in the board
             elif token_pos != self.START_POSITION and token_pos != self.END_POSITION:
-                new_pos = token_pos + diceRollResult
-                if new_pos <= self.END_POSITION and !(self.currentBoard.isPosOccWhite(new_pos)):
+                new_pos = token_pos + self.diceRollResult
+                if new_pos <= self.END_POSITION and not self.currentBoard.isPosOccWhite(new_pos):
                     # if the new_position is a rossette
                     if new_pos in self.ROSETTES:
                         # check if it's occupied by the other player
@@ -106,39 +107,64 @@ class Game:
     # receives one of the values of possibleMoves[] and makes the change which is the id of the
     # token to move or the code to add a new token to the board
     def commit_player_action(self, p_action):
-        # gets a token out of the board if action is to add one, or it simply is the id of the token to move
-        token = self.currentBoard.getTokenIDWhite(
-            self.START_POSITION) if p_action == self.ADD_TOKEN_BOARD else p_action
-        if token == -1:
-            print("error this should not happen")
-        if self.currentTurn = self.BLACK_TURN:
+        if self.currentTurn == self.BLACK_TURN:
+            # gets a token out of the board if action is to add one, or it simply is the id of the token to move
+            token = self.currentBoard.getTokenIDBlack(
+                self.START_POSITION) if p_action == self.ADD_TOKEN_BOARD else p_action
+            if token == -1:
+                print("error this should not happen")
             return self.move_black_token(token)
         else:
+            # gets a token out of the board if action is to add one, or it simply is the id of the token to move
+            token = self.currentBoard.getTokenIDWhite(
+                self.START_POSITION) if p_action == self.ADD_TOKEN_BOARD else p_action
+            if token == -1:
+                print("error this should not happen")
             return self.move_white_token(token)
 
     #  changes the current turn to the correct black or white player
     def set_next_turn(self):
-        if self.currentTurn = self.BLACK_TURN:
-            if !(self.repeatTurn):
+        if self.currentTurn == self.BLACK_TURN:
+            if not self.repeatTurn:
                 self.currentTurn = self.WHITE_TURN
         else:
-            if !(self.repeatTurn):
+            if not self.repeatTurn:
                 self.currentTurn = self.BLACK_TURN
         # turn the repeatTurn flag off
         self.repeatTurn = False
 
     # moves white token according to the result of the dice roll
     def move_white_token(self, id):
-        resultPos = self.currentBoard.move_white_token(id, self.diceRollResult)
+        resultPos = self.currentBoard.move_token_white(id, self.diceRollResult)
+
+        # if we landed in a rossete set the repeat tutn flag
         if resultPos in self.ROSETTES:
             self.repeatTurn = True
+
+        # if the resulting position is within the shared tiles range
+        if 12 >= resultPos >= 5:
+            # if new tile is ocuppied by opposing player token
+            if self.currentBoard.isPosOccBlack(resultPos):
+                # reset position of the black token
+                self.currentBoard.bTokens[self.currentBoard.getTokenIDBlack(
+                    resultPos)] = 0
         return resultPos
 
     # moves black token according to the result of the dice roll
     def move_black_token(self, id):
-        resultPos = self.currentBoard.move_black_token(id, self.diceRollResult)
+        resultPos = self.currentBoard.move_token_black(id, self.diceRollResult)
+
+        # if we landed in a rossete set the repeat tutn flag
         if resultPos in self.ROSETTES:
             self.repeatTurn = True
+
+        # if the resulting position is within the shared tiles range
+        if 12 >= resultPos >= 5:
+            # if new tile is ocuppied by opposing player token
+            if self.currentBoard.isPosOccWhite(resultPos):
+                # reset position of the white token
+                self.currentBoard.wTokens[self.currentBoard.getTokenIDWhite(
+                    resultPos)] = 0
         return resultPos
 
     #  changes the current turn to the correct black or white player
@@ -216,11 +242,27 @@ class Game:
         print("Winner is:", winner)
 
 
-# def main():
-#     game = Game()
+def main():
+    game = Game()
 
-#     game.game()
+# -------------------------- tests calculate_possible_moves ---------------------------------------
+    # game.currentBoard.wTokens = [3, 0, 7, 11, 0, 10, 6]
+    # game.currentBoard.bTokens = [0, 0, 2, 9, 13, 8, 15]
+    # game.diceRollResult = 2
+
+    # print(game.currentBoard.isPosOccBlack(13))
+    # game.currentTurn = game.WHITE_TURN
+    # game.currentBoard.print_board()
+    # game.calculate_possible_moves()
+    # print(game.possibleMoves)
+
+    # game.commit_player_action(3)
+
+    # game.currentBoard.print_board()
+    # print(game.currentTurn)
+
+#   game.game()
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()

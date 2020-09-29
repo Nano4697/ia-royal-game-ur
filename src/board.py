@@ -43,7 +43,7 @@ class Board:
         return -1
 
     # Returns the id of the first token with the given position
-     def getTokenIDBlack(self, pos):
+    def getTokenIDBlack(self, pos):
         for i in range(0, 7):
             if self.bTokens[i] == pos:
                 return i
@@ -53,7 +53,7 @@ class Board:
     # returns true if it finds a white token in the given position, false otherwise
     def isPosOccWhite(self, pos):
         for i in range(0, 7):
-            curr_pos = wTokens[i]
+            curr_pos = self.wTokens[i]
             if curr_pos != 0 and curr_pos != 15:
                 if curr_pos == pos:
                     return True
@@ -62,43 +62,36 @@ class Board:
     # returns true if it finds a black token in the given position, false otherwise
     def isPosOccBlack(self, pos):
         for i in range(0, 7):
-            curr_pos = bTokens[i]
+            curr_pos = self.bTokens[i]
             if curr_pos != 0 and curr_pos != 15:
                 if curr_pos == pos:
                     return True
         return False
 
-
     # moves token to new position and updates opposing player's tokens in case of moving to the sane tile
+
     def move_token_white(self, id, moves):
-        if 0 > id > 6:
+        if 0 >= id >= 6:
             print("error en move token white, id incorrecto")
+            return
         new_pos = self.wTokens[id] + moves
         if new_pos > 15:
             print("error en move token white, movimiento invalido")
+            return
         self.wTokens[id] = new_pos
-
-        # if new tile is ocuppied by opposing player token
-        if self.isPosOccBlack(new_pos):
-            # reset position of the black token
-            self.bTokens[self.getTokenIDBlack(new_pos)] = 0
         return new_pos
-    
+
     # moves token to new position and updates opposing player's tokens in case of moving to the sane tile
     def move_token_black(self, id, moves):
         if 0 > id > 6:
             print("error en move token white, id incorrecto")
+            return
         new_pos = self.bTokens[id] + moves
         if new_pos > 15:
             print("error en move token white, movimiento invalido")
+            return
         self.bTokens[id] = new_pos
-
-        # if new tile is ocuppied by opposing player token
-        if self.isPosOccWhite(new_pos):
-            # reset position of the black token
-            self.wTokens[self.getTokenIDWhite(new_pos)] = 0
         return new_pos
-
 
     def print_tokens(self, tokens):
         for token in tokens:
@@ -106,7 +99,7 @@ class Board:
 
     def print_board(self):
         print("White tokens:")
-        self.print_tokens(self.wTokens)
+        print(self.wTokens)
 
         print("Black tokens:")
-        self.print_tokens(self.bTokens)
+        print(self.bTokens)
