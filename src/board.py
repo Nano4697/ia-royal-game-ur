@@ -12,7 +12,7 @@ class Board:
 
         for token in self.bTokens:
             # as long as I dont find a token's pos <15 it is winning
-            hasWin = hasWin and token.get_pos() == 15
+            hasWin = hasWin and token >= 15
 
             # if it is no longer winning stop the verification for this player
             if not hasWin:
@@ -25,7 +25,7 @@ class Board:
         hasWin = True
 
         for token in self.wTokens:
-            hasWin = hasWin and token.get_pos() == 15
+            hasWin = hasWin and token >= 15
             if not hasWin:
                 break
 
@@ -108,7 +108,7 @@ class Board:
 
     def print_tokens(self, tokens):
         for token in tokens:
-            token.print()
+            print(token)
 
     def print_board(self):
         print("White tokens:")
