@@ -1,4 +1,5 @@
 from PySide2 import QtWidgets
+from PySide2.QtGui import *
 
 from UI import mainWindow
 
@@ -169,19 +170,29 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
                                  "border-color: rgb(255, 0, 0);")
 
     def drawIcons(self):
+        new_wtoken_counter = 0
+        new_btoken_counter = 0
         for token in range(0, 7):
             wtoken_pos = self.currentGame.currentBoard.wTokens[token]
             btoken_pos = self.currentGame.currentBoard.bTokens[token]
-            if wtoken_pos == 0 or wtoken_pos == 15:
+            if wtoken_pos == 0:
+                self.new_wtoken_buttons[new_wtoken_counter].setIcon(
+                    self.white_icon)
+                new_wtoken_counter += 1
+
+            elif wtoken_pos == 15:
                 pass
-
             else:
-
                 wtoken_coord = self.currentGame.W_PATH[wtoken_pos]
                 button = self.getButtonByCoord(
                     wtoken_coord[0], wtoken_coord[1])
                 button.setIcon(self.white_icon)
-            if btoken_pos == 0 or btoken_pos == 15:
+
+            if btoken_pos == 0:
+                self.new_btoken_buttons[new_btoken_counter].setIcon(
+                    self.black_icon)
+                new_btoken_counter += 1
+            elif btoken_pos == 15:
                 pass
             else:
                 btoken_coord = self.currentGame.B_PATH[btoken_pos]
@@ -227,6 +238,8 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.btnWhite6.setEnabled(False)
         self.btnWhite7.setEnabled(False)
         self.clear_higlights()
+        self.delete_icons()
+        self.drawIcons()
 
     def diceRolled(self):
         self.currentGame.roll_dice()
@@ -234,8 +247,8 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.btnRollDice.setEnabled(False)
 
         # ###########################test board #####################################
-        self.currentGame.currentBoard.wTokens = [3, 0, 7, 11, 0, 10, 6]
-        self.currentGame.currentBoard.bTokens = [0, 0, 2, 9, 13, 8, 15]
+        # self.currentGame.currentBoard.wTokens = [3, 0, 7, 11, 0, 10, 6]
+        # self.currentGame.currentBoard.bTokens = [0, 0, 2, 9, 13, 8, 15]
 
         self.drawIcons()
         self.activate_posible_moves()
@@ -254,6 +267,19 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.lblDice1.setText("Dado1")
         self.lblDice2.setText("Dado2")
         self.lblDice3.setText("Dado3")
+
+    def delete_icons(self):
+        for i in range(0, 7):
+            bbutton = self.new_btoken_buttons[i]
+            wbutton = self.new_wtoken_buttons[i]
+            bbutton.setIcon(QIcon())
+            wbutton.setIcon(QIcon())
+        for row in self.board_buttons:
+            for button in row:
+                if button == 0:
+                    pass
+                else:
+                    button.setIcon(QIcon())
 
     def movement(self):
         self.btn10.setEnabled(True)
@@ -277,18 +303,19 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
     # returns the button instance for the given coordinate
 
     def getButtonByCoord(self, row, column):
-        if 0 > row > 6:
-            # error
-            return null
-        if row == 0 and column == 5:
-            # new token
-            return "NEW_TOKEN"
-        if row == 0 and column == 6:
-            # token out of board
-            return "OUT_TOKEN"
-        # return button by name
+        return self.board_buttons[row][column]
+        # if 0 > row > 6:
+        #     # error
+        #     return null
+        # if row == 0 and column == 5:
+        #     # new token
+        #     return "NEW_TOKEN"
+        # if row == 0 and column == 6:
+        #     # token out of board
+        #     return "OUT_TOKEN"
+        # # return button by name
 
-        return self.GameBoard.findChild(mainWindow.QPushButton, self.button_names[row][column])
+        # return self.GameBoard.findChild(mainWindow.QPushButton, self.button_names[row][column])
 
     # returns the id of the token corresponding to the pressed button name, returns -1
     # if no token was found in the position the button was pressed
