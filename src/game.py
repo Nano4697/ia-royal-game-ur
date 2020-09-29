@@ -23,7 +23,7 @@ class Game:
     WHITE_TURN = "White"
     BLACK_TURN = "Black"
 
-    def start_new_game(self, firstPlayer="Black"):
+    def start_new_game(self, firstPlayer="White"):
 
         self.currentTurn = firstPlayer
 
@@ -36,7 +36,7 @@ class Game:
 
     def __init__(self):
         self.currentBoard = Board()
-        self.currentTurn = "Black"
+        self.currentTurn = "White"
         self.currentState = States.DICE_ROLL
         self.aiAgent = AiAgent()
         self.diceRollResult = None
@@ -51,11 +51,13 @@ class Game:
     # have 10 if there are tokens available to move into the board
     def calculate_possible_moves(self):
         moves = []
-        playerTokens = self.currentBoard.wTokens
+        white_turn = True if self.currentTurn == self.WHITE_TURN else False
+        playerTokens = self.currentBoard.wTokens if white_turn else self.currentBoard.bTokens
         addedNewToken = False
 
         # checks if position 0 + dice roll is ocuppied by another player token
         canAddBoardToken = not self.currentBoard.isPosOccWhite(
+            self.diceRollResult) if white_turn else not self.currentBoard.isPosOccBlack(
             self.diceRollResult)
 
         # for each of the player tokens
@@ -68,18 +70,29 @@ class Game:
             # if the token is in the board
             elif token_pos != self.START_POSITION and token_pos != self.END_POSITION:
                 new_pos = token_pos + self.diceRollResult
-                if new_pos <= self.END_POSITION and not self.currentBoard.isPosOccWhite(new_pos):
+                is_newpos_not_occ = not self.currentBoard.isPosOccWhite(new_pos) if white_turn else not self.currentBoard.isPosOccBlack(
+                    new_pos)
+                if new_pos <= self.END_POSITION and is_newpos_not_occ:
                     # if the new_position is a rossette
                     if new_pos in self.ROSETTES:
                         # check if it's occupied by the other player
-                        if self.currentBoard.isPosOccBlack(new_pos):
+                        other_player_occ = self.currentBoard.isPosOccBlack(
+                            new_pos) if white_turn else self.currentBoard.isPosOccWhite(new_pos)
+                        if other_player_occ:
                             continue    # can't land on other player's token when they are on a rosette
                     moves.append(token_id)  # add id of token to move
         # set the possible moves
         self.possibleMoves = moves
 
-    def ai_turn(self, board):
-        pass
+    def ai_turn(self):
+        self.roll_dice()
+        self.calculate_possible_moves()
+        if len(self.possibleMoves) > 0:
+            self.commit_player_action(self.possibleMoves[0])
+
+        # self.set_next_turn()
+
+        # if self.currentTurn == self.BLACK_TURN:
 
     def roll_dice(self):
         randomValue = random.randint(0, 999)

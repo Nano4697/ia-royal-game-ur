@@ -34,7 +34,20 @@ class Board:
         else:
             return hasWin, "None"
 
+    def has_white_won(self):
+        for wtoken in self.wTokens:
+            if wtoken != 15:
+                return False
+        return True
+
+    def has_black_won(self):
+        for btoken in self.bTokens:
+            if btoken != 15:
+                return False
+        return True
+
     # Returns the id of the first token with the given position
+
     def getTokenIDWhite(self, pos):
         for i in range(0, 7):
             if self.wTokens[i] == pos:
