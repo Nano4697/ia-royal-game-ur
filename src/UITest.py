@@ -29,6 +29,9 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.lastClickedButton = ""
         # self.findChild(QPushButton,)
 
+    def clear_dice_result(self):
+        self.lblTotalDice.setText('0')
+
     # sets the handler function for the token buttons
     def set_button_handlers(self):
 
@@ -354,6 +357,7 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
             print("It's not your turn yet, be patient")
             return
         print("clicked board button: ", btnName)
+        self.clear_dice_result()
         token_id = self.getTokenIdbyBtnName(btnName)
         if token_id == -1:
             return
@@ -417,6 +421,7 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         if self.currentGame.ADD_TOKEN_BOARD not in self.currentGame.possibleMoves:
             return
         print("clicked new token button: ", btnName)
+        self.clear_dice_result()
         self.currentGame.commit_player_action(self.currentGame.ADD_TOKEN_BOARD)
         self.clear_higlights()
 
