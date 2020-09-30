@@ -572,10 +572,8 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate(
-            "MainWindow", u"MainWindow", None))
-        self.GameBoard.setTitle(QCoreApplication.translate(
-            "MainWindow", u"Gameboard", None))
+        MainWindow.setWindowTitle(u"MainWindow")
+        self.GameBoard.setTitle(u"Gameboard")
         self.lblGameboard.setText("")
         self.btnWhite1.setText("")
         self.btnWhite2.setText("")
@@ -591,12 +589,9 @@ class Ui_MainWindow(object):
         self.btnBlack3.setText("")
         self.btnBlack4.setText("")
         self.btnBlack5.setText("")
-        self.lblDice1.setText(
-            QCoreApplication.translate("MainWindow", u"0", None))
-        self.btnRollDice.setText(QCoreApplication.translate(
-            "MainWindow", u"Roll Dice", None))
-        self.btnNewGame.setText(QCoreApplication.translate(
-            "MainWindow", u"New Game", None))
+        self.lblDice1.setText(u"0")
+        self.btnRollDice.setText(u"Roll Dice")
+        self.btnNewGame.setText(u"New Game")
         self.btn23.setText("")
         self.btn22.setText("")
         self.btn11.setText("")
@@ -617,14 +612,9 @@ class Ui_MainWindow(object):
         self.btn17.setText("")
         self.btn26.setText("")
         self.btn27.setText("")
-        self.lblDice2.setText(
-            QCoreApplication.translate("MainWindow", u"0", None))
-        self.lblDice3.setText(
-            QCoreApplication.translate("MainWindow", u"0", None))
-        self.lblTotalDice.setText(
-            QCoreApplication.translate("MainWindow", u"0", None))
-        self.lblTotal.setText(QCoreApplication.translate(
-            "MainWindow", u"Total:", None))
-        self.lblTurn.setText(QCoreApplication.translate(
-            "MainWindow", u"Turn of:", None))
+        self.lblDice2.setText(u"0")
+        self.lblDice3.setText(u"0")
+        self.lblTotalDice.setText(u"0")
+        self.lblTotal.setText(u"Total:")
+        self.lblTurn.setText(u"Turn of:")
     # retranslateUi
