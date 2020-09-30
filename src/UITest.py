@@ -5,7 +5,6 @@ from UI import mainWindow
 
 from game import *
 
-
 class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
 
     button_names = [["btn00", "btn01", "btn02", "btn03", "new", "out", "btn06", "btn07"],
@@ -499,7 +498,6 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
     def getTokenIdbyBtnName(self, btnName):
         pos = self.button_pos[btnName]
         return self.currentGame.currentBoard.getTokenIDWhite(pos)
-
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication()
