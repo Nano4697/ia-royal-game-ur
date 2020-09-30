@@ -93,9 +93,9 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.btnWhite7.setEnabled(False)
 
         self.btnRollDice.setEnabled(False)
-        self.lblDice1.setText("0")
-        self.lblDice2.setText("0")
-        self.lblDice3.setText("0")
+        self.lblDice1.setText("")
+        self.lblDice2.setText("")
+        self.lblDice3.setText("")
 
     def activateAll(self):
         self.btnBlack1.setEnabled(True)
@@ -262,8 +262,7 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
                 pass
             else:
                 wtoken_coord = self.currentGame.W_PATH[wtoken_pos]
-                button = self.getButtonByCoord(
-                    wtoken_coord[0], wtoken_coord[1])
+                button = self.getButtonByCoord(wtoken_coord[0], wtoken_coord[1])
                 button.setIcon(self.white_icon)
 
             if btoken_pos == 0:
@@ -274,15 +273,14 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
                 pass
             else:
                 btoken_coord = self.currentGame.B_PATH[btoken_pos]
-                button = self.getButtonByCoord(
-                    btoken_coord[0], btoken_coord[1])
+                button = self.getButtonByCoord(btoken_coord[0], btoken_coord[1])
                 button.setIcon(self.black_icon)
 
     def newGame(self):
         self.btnRollDice.setEnabled(True)
-        self.lblDice1.setText("0")
-        self.lblDice2.setText("0")
-        self.lblDice3.setText("0")
+        self.lblDice1.setText("")
+        self.lblDice2.setText("")
+        self.lblDice3.setText("")
 
         # self.btn00.setEnabled(False)
         # self.btn01.setEnabled(False)
@@ -378,9 +376,7 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         if self.currentGame.currentTurn == self.currentGame.WHITE_TURN:
             self.currentGame.currentState = States.DICE_ROLL
             self.btnRollDice.setEnabled(True)
-            # self.refreshUI()
         else:
-
             # make AI move
             self.currentGame.currentState = States.AI_MOVE
 
