@@ -344,6 +344,7 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.lblDice1.setText("Dado1")
         self.lblDice2.setText("Dado2")
         self.lblDice3.setText("Dado3")
+        self.lblTotalDice.setText(f'{self.currentGame.diceRollResult}')
 
     # handles the click of a button in the board
     def board_button_handler(self):
