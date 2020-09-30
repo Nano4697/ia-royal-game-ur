@@ -1,5 +1,6 @@
 from PySide2 import QtWidgets
 from PySide2.QtGui import *
+from PySide2.QtCore import QTimer
 
 from UI import mainWindow
 
@@ -342,9 +343,7 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.btnWhite6.setEnabled(True)
         self.btnWhite7.setEnabled(True)
 
-        self.lblDice1.setText("Dado1")
-        self.lblDice2.setText("Dado2")
-        self.lblDice3.setText("Dado3")
+        self.lblTotal.setText('Player rolled:')
         self.lblTotalDice.setText(f'{self.currentGame.diceRollResult}')
 
     # handles the click of a button in the board
@@ -386,9 +385,9 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
 
         # self.btnRollDice.setEnabled(True)
         # self.refreshUI()
-
-    def computerTurn(self):
-        self.currentGame.ai_turn()
+    def make_ai_move(self):
+        self.lblTotal.setText('AI rolled')
+        self.currentGame.ai_turn(lambda s: self.lblTotalDice.setText(f'{s}'))
         if self.currentGame.currentBoard.has_black_won():
             self.ai_won()
             return
@@ -403,9 +402,14 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         else:
             self.currentGame.currentState = States.DICE_ROLL
             self.btnRollDice.setEnabled(True)
+            self.lblTurn.setText('Player\'s turn')
             self.refreshUI()
 
     # handles the click of a button in new tokens space
+
+    def computerTurn(self):
+        self.lblTurn.setText('AI\'s turn')
+        QTimer.singleShot(675, self.make_ai_move)
 
     def wtoken_button_handler(self):
         btnName = self.sender().objectName()
@@ -431,7 +435,8 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         if self.currentGame.currentTurn == self.currentGame.WHITE_TURN:
             self.currentGame.currentState = States.DICE_ROLL
             self.btnRollDice.setEnabled(True)
-            # self.refreshUI()
+            self.lblTurn.setText('Player\'s turn')
+            self.refreshUI()
         else:
             # make AI move
             self.currentGame.currentState = States.AI_MOVE

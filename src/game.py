@@ -83,8 +83,9 @@ class Game:
         # set the possible moves
         self.possibleMoves = moves
 
-    def ai_turn(self):
+    def ai_turn(self, notifying):
         self.roll_dice()
+        notifying(self.diceRollResult)
         self.calculate_possible_moves()
         if len(self.possibleMoves) > 0:
             self.commit_player_action(self.possibleMoves[0])

@@ -545,7 +545,7 @@ class Ui_MainWindow(object):
         self.lblTotalDice.setFont(font)
         self.lblTotal = QLabel(self.GameBoard)
         self.lblTotal.setObjectName(u"lblTotal")
-        self.lblTotal.setGeometry(QRect(1060, 620, 47, 41))
+        self.lblTotal.setGeometry(QRect(1020, 620, 87, 41))
         self.lblTotal.setFont(font)
         self.lblTurn = QLabel(self.GameBoard)
         self.lblTurn.setObjectName(u"lblTurn")
