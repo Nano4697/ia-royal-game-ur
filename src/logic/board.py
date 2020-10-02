@@ -11,6 +11,14 @@ class Board:
         self.landedOnRosette = False
 
         self.lastMovedToken = 0
+        self.ateToken = False
+        self.tokenExited = False
+
+    def unsetEatenToken(self):
+        self.ateToken = False
+
+    def eatToken(self):
+        self.ateToken = True
 
     def check_win_condition(self):
         hasWin = True
@@ -46,17 +54,34 @@ class Board:
         # if no token was found in that position
         return -1
 
+    # Returns the id of the first token with the given position
+
+    def getTokenIDWhite(self, pos):
+        for i in range(0, 7):
+            if self.wTokens[i] == pos:
+                return i
+        # if no token was found in that position
+        return -1
+
+    # Returns the id of the first token with the given position
+    def getTokenIDBlack(self, pos):
+        for i in range(0, 7):
+            if self.bTokens[i] == pos:
+                return i
+        # if no token was found in that position
+        return -1
+
     # returns true if it finds a white token in the given position, false otherwise
     def isPosOccWhite(self, pos):
         for i in range(0, 7):
-            if self.wTokens[i] == pos:
+            if pos == 15 or (5 <= pos <= 12 and self.wTokens[i] == pos):
                 return True
         return False
 
     # returns true if it finds a black token in the given position, false otherwise
     def isPosOccBlack(self, pos):
         for i in range(0, 7):
-            if self.bTokens[i] == pos:
+            if pos == 15 or (5 <= pos <= 12 and self.bTokens[i] == pos):
                 return True
         return False
 
@@ -74,13 +99,15 @@ class Board:
 
         if self.wTokens[id] in self.ROSETTES:
             self.landedOnRosette = True
-        else:
-            if self.wTokens[id] >= 5 and self.wTokens[id] <= 12:
-                for token in range(0, len(self.wTokens)):
-                    if self.wTokens[id] == self.bTokens[token]:
-                        # print("Black token replaced", id, token,
-                        #       self.wTokens[id], self.bTokens[token])
-                        self.bTokens[token] = 0
+        if self.wTokens[id] == 15:
+            self.tokenExited = True
+        # else:
+        #     if self.wTokens[id] >= 5 and self.wTokens[id] <= 12:
+        #         for token in range(0, len(self.wTokens)):
+        #             if self.wTokens[id] == self.bTokens[token]:
+        #                 # print("Black token replaced", id, token,
+        #                 #       self.wTokens[id], self.bTokens[token])
+        #                 self.bTokens[token] = 0
 
         self.lastMovedToken = id
         return self.wTokens[id]
@@ -91,39 +118,21 @@ class Board:
 
         if self.bTokens[id] in self.ROSETTES:
             self.landedOnRosette = True
-        else:
-            if self.bTokens[id] >= 5 and self.bTokens[id] <= 12:
-                for token in range(0, len(self.bTokens)):
-                    if self.bTokens[id] == self.wTokens[token]:
-                        # print("White token replaced", id, token,
-                        #       self.bTokens[id], self.wTokens[token])
-                        self.wTokens[token] = 0
+        if self.bTokens[id] == 15:
+            self.tokenExited = True
+        # else:
+            # if self.bTokens[id] >= 5 and self.bTokens[id] <= 12:
+            #     for token in range(0, len(self.bTokens)):
+            #         if self.bTokens[id] == self.wTokens[token]:
+            #             # print("White token replaced", id, token,
+            #             #       self.bTokens[id], self.wTokens[token])
+            #             self.wTokens[token] = 0
 
         self.lastMovedToken = id
         return self.bTokens[id]
 
     def has_landed_on_rossette(self):
         return self.landedOnRosette
-
-    # returns array of token ids that can be moved on the board, and will
-    # have 10 if there are tokens available to move into the board
-    def calculate_possible_moves(self, diceRoll):
-        moves = []
-        addedToken = False
-
-        # checks if position 0 + dice roll is ocuppied by another player token
-        canAddBoardToken = not (
-            self.isPosOccWhite(diceRoll))
-
-        # for each of the player tokens
-        for token_id in range(0, len(self.wTokens)):
-            token_pos = self.wTokens[token_id]
-
-            if token_pos != 15:
-                new_pos = token_pos+diceRoll
-                if new_pos <= 15 and not self.isPosOccWhite(new_pos) and self.check_black_conflict(new_pos):
-                    moves.append(token_id)
-        return moves
 
     def check_black_conflict(self, pos):
         if self.isPosOccBlack(pos) and pos in self.ROSETTES:
@@ -159,3 +168,17 @@ class Board:
 
     def getLastMove(self):
         return self.lastMovedToken
+
+    def getScoreWhite(self):
+        total = 0
+        for token in self.wTokens:
+            if token == 15:
+                total += 1
+        return total
+
+    def getScoreBlack(self):
+        total = 0
+        for token in self.bTokens:
+            if token == 15:
+                total += 1
+        return total
