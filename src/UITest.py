@@ -94,6 +94,7 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.btnWhite7.setEnabled(False)
 
         self.btnRollDice.setEnabled(False)
+        self.btnPassTurn.setEnabled(False)
         self.lblDice1.setText("")
         self.lblDice2.setText("")
         self.lblDice3.setText("")
@@ -139,6 +140,7 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         self.btnWhite7.setEnabled(True)
 
         self.btnRollDice.setEnabled(True)
+        #self.btnPassTurn.setEnabled(True)
 
     def new_token_buttons_enabled(self, enable):
         self.btnWhite1.setEnabled(enable)
@@ -279,9 +281,11 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
 
     def newGame(self):
         self.btnRollDice.setEnabled(True)
+        self.btnPassTurn.setEnabled(False)
         self.lblDice1.setText("")
         self.lblDice2.setText("")
         self.lblDice3.setText("")
+        self.lblTurn.setText('Player\'s turn')
 
         # self.btn00.setEnabled(False)
         # self.btn01.setEnabled(False)
@@ -323,6 +327,7 @@ class GameBoard(mainWindow.Ui_MainWindow, QtWidgets.QMainWindow):
         # self.currentGame.currentStatec = States.PLAYER_MOVE
         # self.currentGame.currentTurn = self.currentGame.WHITE_TURN
         self.btnRollDice.setEnabled(False)
+        self.btnPassTurn.setEnabled(True)
         self.currentGame.currentState = States.PLAYER_MOVE
 
         # ###########################test board #####################################
