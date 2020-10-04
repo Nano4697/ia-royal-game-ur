@@ -317,41 +317,41 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
     def select_player(self):
         msg = QMessageBox(self)
         # msg.setIcon(QMessageBox.Information)
-        msg.setText("Seleccione quien jugará primero")
+        msg.setText("Select player to move first")
         msg.setInformativeText(
-            "El jugador usa las fichas blancas mientras\nque la computadora usa las fichas negras")
-        msg.setWindowTitle("Selección de primer jugador")
+            "Player : white tokens (bottom) \n"
+            "Comp: black tokens (top)")
+        msg.setWindowTitle("Player Select")
 
-        black_button = msg.addButton("Negras", QMessageBox.YesRole)
-        white_button = msg.addButton("Blancas", QMessageBox.NoRole)
-        random_button = msg.addButton("Aleatorio", QMessageBox.RejectRole)
+        black_button = msg.addButton("Black", QMessageBox.YesRole)
+        white_button = msg.addButton("White", QMessageBox.NoRole)
+        random_button = msg.addButton("Random", QMessageBox.RejectRole)
 
         ret = msg.exec_()
-        print("el valor de ret es: ", ret)
         if msg.clickedButton() == white_button:
             self.currentGame.currentTurn = Game.WHITE_TURN
-            print("turno blanco")
+
         elif msg.clickedButton() == black_button:
             self.currentGame.currentTurn = Game.BLACK_TURN
-            print("turno negro")
+
         else:
             self.currentGame.set_random_player_turn()
-            print("turno aleatorio")
 
     def confirm_game_cancel(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
-        msg.setText("Desea iniciar un nuevo juego?")
+        msg.setText("Would you like to start a new game?")
         msg.setInformativeText(
-            "El juego actual se perderá")
-        msg.setWindowTitle("Confirmar Nueva Partida")
-        msg.addButton("Sí", QMessageBox.YesRole)
+            "Current progress will be lost")
+        msg.setWindowTitle("Confirm New Game")
+        yes_button = msg.addButton("Yes", QMessageBox.YesRole)
         msg.addButton("No", QMessageBox.NoRole)
 
         ret = msg.exec_()
 
-        if (ret == QMessageBox.YesRole):
+        if msg.clickedButton() == yes_button:
             return True
+
         else:
             return False
 
