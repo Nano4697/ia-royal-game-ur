@@ -72,7 +72,7 @@ class Game:
                 # add code to signify new token can be adde to board only once
                 moves.append(self.ADD_TOKEN_BOARD)
             # if the token is in the board
-            elif token_pos != self.START_POSITION and token_pos != self.END_POSITION:
+            elif token_pos >= self.START_POSITION and token_pos <= self.END_POSITION:
                 new_pos = token_pos + self.diceRollResult
                 is_newpos_not_occ = not self.currentBoard.isPosOccWhite(new_pos) if white_turn else not self.currentBoard.isPosOccBlack(
                     new_pos)
@@ -140,14 +140,19 @@ class Game:
                 self.START_POSITION) if p_action == self.ADD_TOKEN_BOARD else p_action
             if token == -1:
                 print("error this should not happen")
-            return self.move_black_token(token)
+            new_pos = self.move_black_token(token)
         else:
             # gets a token out of the board if action is to add one, or it simply is the id of the token to move
             token = self.currentBoard.getTokenIDWhite(
                 self.START_POSITION) if p_action == self.ADD_TOKEN_BOARD else p_action
             if token == -1:
                 print("error this should not happen")
-            return self.move_white_token(token)
+            new_pos = self.move_white_token(token)
+
+        if new_pos > 15:
+            print("error this should not happen")
+
+        return new_pos
 
     # moves white token according to the result of the dice roll
     def move_white_token(self, id):
@@ -230,19 +235,19 @@ class Game:
                 self.set_next_turn()
                 self.next_state()
 
-                self.ask_token_to_move()
+                # self.ask_token_to_move()
 
-                userInput = input("Move token:")
-                while not userInput.isdigit() and not userInput == "":
-                    userInput = input("Move token:")
+                # userInput = input("Move token:")
+                # while not userInput.isdigit() and not userInput == "":
+                #     userInput = input("Move token:")
 
-                if userInput != "":
-                    tokenToMove = int(userInput)
-                else:
-                    tokenToMove = -1
+                # if userInput != "":
+                #     tokenToMove = int(userInput)
+                # else:
+                #     tokenToMove = -1
 
                 newPos = self.commit_player_action(
-                    self.possibleMoves[tokenToMove])
+                    self.possibleMoves[0])
 
                 if self.repeatTurn:
 
@@ -251,7 +256,11 @@ class Game:
                     print("\tDice result: ", self.diceRollResult)
                     self.calculate_possible_moves()
 
-            self.set_next_turn()
+            self.hasFinished, winner = self.currentBoard.check_win_condition()
+            if self.hasFinished:
+                break
+
+            # self.set_next_turn()
             self.next_state()
 
             self.repeatTurn = True
@@ -265,6 +274,7 @@ class Game:
                 # self.repeatTurn = False
 
                 tokenToMove = self.ai_turn()
+                self.set_next_turn()
                 # print("\t\t\tToken moved:", tokenToMove)
                 if tokenToMove != -1:
                     newPos = self.commit_player_action(tokenToMove)
