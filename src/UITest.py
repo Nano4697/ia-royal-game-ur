@@ -471,9 +471,11 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
             self.computerTurn()
 
     def player_won(self):
+        self.lblTurn.setText('Player has won')
         return
 
     def ai_won(self):
+        self.lblTurn.setText('AI has won')
         return
 
     # removes all token icons from the buttons in the board
