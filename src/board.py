@@ -1,6 +1,3 @@
-# from token import Token
-
-
 class Board:
 
     def __init__(self):
@@ -28,11 +25,7 @@ class Board:
             hasWin = hasWin and token >= 15
             if not hasWin:
                 break
-
-        if hasWin:
-            return hasWin, "White"
-        else:
-            return hasWin, "None"
+        return hasWin, "White" if hasWin else "None"
 
     def has_white_won(self):
         for wtoken in self.wTokens:
@@ -47,7 +40,6 @@ class Board:
         return True
 
     # Returns the id of the first token with the given position
-
     def getTokenIDWhite(self, pos):
         for i in range(0, 7):
             if self.wTokens[i] == pos:
@@ -82,7 +74,6 @@ class Board:
         return False
 
     # moves token to new position and updates opposing player's tokens in case of moving to the sane tile
-
     def move_token_white(self, id, moves):
         if 0 >= id >= 6:
             print("error en move token white, id incorrecto")

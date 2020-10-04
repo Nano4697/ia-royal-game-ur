@@ -25,11 +25,9 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
         self.deactivateAll()
         self.btnNewGame.clicked.connect(self.newGame)
         self.btnRollDice.clicked.connect(self.diceRolled)
-        # self.btnWhite1.clicked.connect(self.movement)
         self.set_button_handlers()
         self.lastClickedButton = ""
         self.is_game_running = False
-        # self.findChild(QPushButton,)
 
     def clear_dice_result(self):
         self.lblTotalDice.setText('0')
@@ -142,7 +140,6 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
         self.btnWhite7.setEnabled(True)
 
         self.btnRollDice.setEnabled(True)
-        # self.btnPassTurn.setEnabled(True)
 
     def new_token_buttons_enabled(self, enable):
         self.btnWhite1.setEnabled(enable)
@@ -176,7 +173,6 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
         self.btn27.setEnabled(False)
 
     def activate_posible_moves(self):
-        # calculate possible moves
         self.currentGame.calculate_possible_moves()
 
         # if there are no possible moves, make a pass button
@@ -185,16 +181,13 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
 
         for move in self.currentGame.possibleMoves:
             if move == self.currentGame.ADD_TOKEN_BOARD:
-                # self.new_token_buttons_enabled(True)
                 self.highlight_new_wtoken_button()
             else:
                 token_pos = self.currentGame.currentBoard.wTokens[move]
                 button_coord = self.currentGame.W_PATH[token_pos]
-                button = self.getButtonByCoord(
-                    button_coord[0], button_coord[1])
+                button = self.getButtonByCoord(button_coord[0], button_coord[1])
 
                 # enable and highlight icon somehow
-                # button.setEnabled(True)
                 button.setStyleSheet(u"background-color: rgba(100, 0, 255, 50);\n"
                                      "border-color: rgb(255, 0, 0); \n")
 
@@ -210,8 +203,7 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
                 self.currentGame.diceRollResult
             if new_pos < self.currentGame.END_POSITION:
                 new_pos_coord = self.currentGame.W_PATH[new_pos]
-                button = self.getButtonByCoord(
-                    new_pos_coord[0], new_pos_coord[1])
+                button = self.getButtonByCoord(new_pos_coord[0], new_pos_coord[1])
                 button.setStyleSheet(u"background-color: rgba(255, 0, 0, 50);")
 
     def clear_higlights(self):
@@ -259,28 +251,24 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
             wtoken_pos = self.currentGame.currentBoard.wTokens[token]
             btoken_pos = self.currentGame.currentBoard.bTokens[token]
             if wtoken_pos == 0:
-                self.new_wtoken_buttons[new_wtoken_counter].setIcon(
-                    self.white_icon)
+                self.new_wtoken_buttons[new_wtoken_counter].setIcon(self.white_icon)
                 new_wtoken_counter += 1
 
             elif wtoken_pos == 15:
                 pass
             else:
                 wtoken_coord = self.currentGame.W_PATH[wtoken_pos]
-                button = self.getButtonByCoord(
-                    wtoken_coord[0], wtoken_coord[1])
+                button = self.getButtonByCoord(wtoken_coord[0], wtoken_coord[1])
                 button.setIcon(self.white_icon)
 
             if btoken_pos == 0:
-                self.new_btoken_buttons[new_btoken_counter].setIcon(
-                    self.black_icon)
+                self.new_btoken_buttons[new_btoken_counter].setIcon(self.black_icon)
                 new_btoken_counter += 1
             elif btoken_pos == 15:
                 pass
             else:
                 btoken_coord = self.currentGame.B_PATH[btoken_pos]
-                button = self.getButtonByCoord(
-                    btoken_coord[0], btoken_coord[1])
+                button = self.getButtonByCoord(btoken_coord[0], btoken_coord[1])
                 button.setIcon(self.black_icon)
 
     def newGame(self):
@@ -303,7 +291,6 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
 
         if self.currentGame.currentTurn == Game.WHITE_TURN:
             self.btnRollDice.setEnabled(True)
-            # self.btnPassTurn.setEnabled(False)
             self.lblTurn.setText('Player\'s turn')
 
         else:
@@ -315,11 +302,8 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
 
     def select_player(self):
         msg = QMessageBox(self)
-        # msg.setIcon(QMessageBox.Information)
         msg.setText("Select player to move first")
-        msg.setInformativeText(
-            "Player : white tokens (bottom) \n"
-            "Comp: black tokens (top)")
+        msg.setInformativeText("Player : white tokens (bottom)\nComp: black tokens (top)")
         msg.setWindowTitle("Player Select")
 
         black_button = msg.addButton("Black", QMessageBox.YesRole)
@@ -329,10 +313,8 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
         ret = msg.exec_()
         if msg.clickedButton() == white_button:
             self.currentGame.currentTurn = Game.WHITE_TURN
-
         elif msg.clickedButton() == black_button:
             self.currentGame.currentTurn = Game.BLACK_TURN
-
         else:
             self.currentGame.set_random_player_turn()
 
@@ -340,19 +322,14 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
         msg.setText("Would you like to start a new game?")
-        msg.setInformativeText(
-            "Current progress will be lost")
+        msg.setInformativeText("Current progress will be lost")
         msg.setWindowTitle("Confirm New Game")
         yes_button = msg.addButton("Yes", QMessageBox.YesRole)
         msg.addButton("No", QMessageBox.NoRole)
 
         ret = msg.exec_()
 
-        if msg.clickedButton() == yes_button:
-            return True
-
-        else:
-            return False
+        return msg.clickedButton() == yes_button
 
     def diceRolled(self):
         self.currentGame.roll_dice()
@@ -403,12 +380,7 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
             # make AI move
             self.currentGame.currentState = States.AI_MOVE
 
-            # probably thread this to avoid blocking the UI
             self.computerTurn()
-            # self.currentGame.currentState = States.DICE_ROLL
-
-        # self.btnRollDice.setEnabled(True)
-        # self.refreshUI()
 
     def make_ai_move(self):
         self.lblTotal.setText('AI rolled')
@@ -431,7 +403,6 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
             self.refreshUI()
 
     # handles the click of a button in new tokens space
-
     def computerTurn(self):
         self.lblTurn.setText('AI\'s turn')
         QTimer.singleShot(675, self.make_ai_move)
@@ -478,7 +449,6 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
         return
 
     # removes all token icons from the buttons in the board
-
     def delete_icons(self):
         for i in range(0, 7):
             bbutton = self.new_btoken_buttons[i]
@@ -509,15 +479,12 @@ class GameBoard(mainWindow.Ui_MainWindow, QMainWindow):
         self.btn26.setEnabled(True)
         self.btn27.setEnabled(True)
 
-        # self.btn23.setStyleSheet(u"background-color: rgba(255, 0, 0, 50);")
-
     # returns the button instance for the given coordinate
     def getButtonByCoord(self, row, column):
         return self.board_buttons[row][column]
 
     # returns the id of the token corresponding to the pressed button name, returns -1
     # if no token was found in the position the button was pressed
-
     def getTokenIdbyBtnName(self, btnName):
         pos = self.button_pos[btnName]
         return self.currentGame.currentBoard.getTokenIDWhite(pos)
