@@ -74,14 +74,14 @@ class Board:
     # returns true if it finds a white token in the given position, false otherwise
     def isPosOccWhite(self, pos):
         for i in range(0, 7):
-            if pos == 15 or (5 <= pos <= 12 and self.wTokens[i] == pos):
+            if pos == 15 or self.wTokens[i] == pos:
                 return True
         return False
 
     # returns true if it finds a black token in the given position, false otherwise
     def isPosOccBlack(self, pos):
         for i in range(0, 7):
-            if pos == 15 or (5 <= pos <= 12 and self.bTokens[i] == pos):
+            if pos == 15 or self.bTokens[i] == pos:
                 return True
         return False
 

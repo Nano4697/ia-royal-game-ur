@@ -78,7 +78,7 @@ class Game:
                     new_pos)
                 if (new_pos < self.END_POSITION and is_newpos_not_occ) or new_pos == self.END_POSITION:
                     # if the new_position is a rossette
-                    if new_pos in self.ROSETTES:
+                    if new_pos in self.ROSETTES and 5 <= new_pos <= 12:
                         # check if it's occupied by the other player
                         other_player_occ = self.currentBoard.isPosOccBlack(
                             new_pos) if white_turn else self.currentBoard.isPosOccWhite(new_pos)

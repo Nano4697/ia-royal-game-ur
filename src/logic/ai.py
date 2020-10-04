@@ -109,7 +109,7 @@ class AiAgent:
         # print("------------- Calculating move - BEGIN ----------------")
         for move in possible_moves:
             move.set_next_turn()
-            evaluation = self.minimax(move, 3, alpha, beta, True)
+            evaluation = self.minimax(move, 1, alpha, beta, True)
             # print("parent evaluation:", evaluation)
 
             # print("\t\t\t\t\tBoard value:", evaluation)
