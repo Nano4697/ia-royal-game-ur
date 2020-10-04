@@ -3,11 +3,13 @@ from ai import *
 from board import Board
 import random
 
+
 class States(Enum):
     DICE_ROLL = 0
     PLAYER_MOVE = 1
     AI_MOVE = 2
     END_GAME = 3
+
 
 class Game:
     ROSETTES = [4, 8, 14]
@@ -46,8 +48,13 @@ class Game:
     def redraw_ui(self):
         pass
 
+    def set_random_player_turn(self):
+        randomValue = random.randint(0, 1)
+        self.currentTurn = Game.WHITE_TURN if randomValue else Game.BLACK_TURN
+
     # returns array of token ids that can be moved on the board, and will
     # have 10 if there are tokens available to move into the board
+
     def calculate_possible_moves(self):
         moves = []
         white_turn = True if self.currentTurn == self.WHITE_TURN else False
@@ -224,7 +231,8 @@ class Game:
                 self.repeatTurn = False
                 self.next_state()
 
-                newPos = self.currentBoard.move_token_white((turns % 7), self.dice)
+                newPos = self.currentBoard.move_token_white(
+                    (turns % 7), self.dice)
 
                 if newPos in self.ROSETTES:
                     self.repeatTurn = True
@@ -241,7 +249,8 @@ class Game:
             # ---------------- AI MOVE --------------
             while self.repeatTurn:
                 self.repeatTurn = False
-                newPos = self.currentBoard.move_token_black((turns % 7), self.dice)
+                newPos = self.currentBoard.move_token_black(
+                    (turns % 7), self.dice)
 
                 if newPos in self.ROSETTES:
                     self.repeatTurn = True
@@ -257,6 +266,7 @@ class Game:
         self.next_state()
         self.print_board()
         print("Winner is:", winner)
+
 
 def main():
     game = Game()
@@ -278,6 +288,7 @@ def main():
     # print(game.currentTurn)
 
 #   game.game()
+
 
 if __name__ == "__main__":
     main()

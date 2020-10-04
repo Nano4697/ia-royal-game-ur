@@ -14,6 +14,7 @@ from PySide2.QtWidgets import *
 
 import Images_rc
 
+
 class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
@@ -294,8 +295,10 @@ class Ui_MainWindow(object):
 
         self.btnPassTurn = QPushButton(self.GameBoard)
         self.btnPassTurn.setObjectName(u"btnPassTurn")
-        self.btnPassTurn.setGeometry(QRect(1090, 220, 101, 41))#QRect(1090, 170, 101, 41))
+        # QRect(1090, 170, 101, 41))
+        self.btnPassTurn.setGeometry(QRect(1090, 220, 101, 41))
         self.btnPassTurn.setFont(font)
+        self.btnPassTurn.setVisible(False)
 
         self.btnNewGame = QPushButton(self.GameBoard)
         self.btnNewGame.setObjectName(u"btnNewGame")
