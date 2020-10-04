@@ -3,13 +3,11 @@ from ai import *
 from board import Board
 import random
 
-
 class States(Enum):
     DICE_ROLL = 0
     PLAYER_MOVE = 1
     AI_MOVE = 2
     END_GAME = 3
-
 
 class Game:
     ROSETTES = [4, 8, 14]
@@ -267,7 +265,6 @@ class Game:
         self.print_board()
         print("Winner is:", winner)
 
-
 def main():
     game = Game()
 
@@ -288,7 +285,6 @@ def main():
     # print(game.currentTurn)
 
 #   game.game()
-
 
 if __name__ == "__main__":
     main()
