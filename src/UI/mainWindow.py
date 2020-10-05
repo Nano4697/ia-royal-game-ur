@@ -13,7 +13,6 @@ from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
 import Images_rc
-import Images_rc
 
 
 class Ui_MainWindow(object):
@@ -289,14 +288,18 @@ class Ui_MainWindow(object):
         font = QFont()
         font.setPointSize(12)
         self.lblDice1.setFont(font)
-        self.txtHistory = QTextEdit(self.GameBoard)
-        self.txtHistory.setObjectName(u"txtHistory")
-        self.txtHistory.setEnabled(False)
-        self.txtHistory.setGeometry(QRect(820, 690, 421, 171))
         self.btnRollDice = QPushButton(self.GameBoard)
         self.btnRollDice.setObjectName(u"btnRollDice")
         self.btnRollDice.setGeometry(QRect(1090, 170, 101, 41))
         self.btnRollDice.setFont(font)
+
+        self.btnPassTurn = QPushButton(self.GameBoard)
+        self.btnPassTurn.setObjectName(u"btnPassTurn")
+        # QRect(1090, 170, 101, 41))
+        self.btnPassTurn.setGeometry(QRect(1090, 220, 101, 41))
+        self.btnPassTurn.setFont(font)
+        self.btnPassTurn.setVisible(False)
+
         self.btnNewGame = QPushButton(self.GameBoard)
         self.btnNewGame.setObjectName(u"btnNewGame")
         self.btnNewGame.setGeometry(QRect(20, 30, 101, 41))
@@ -547,7 +550,7 @@ class Ui_MainWindow(object):
         self.lblTotalDice.setFont(font)
         self.lblTotal = QLabel(self.GameBoard)
         self.lblTotal.setObjectName(u"lblTotal")
-        self.lblTotal.setGeometry(QRect(1060, 620, 47, 41))
+        self.lblTotal.setGeometry(QRect(1020, 620, 87, 41))
         self.lblTotal.setFont(font)
         self.lblTurn = QLabel(self.GameBoard)
         self.lblTurn.setObjectName(u"lblTurn")
@@ -574,10 +577,8 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate(
-            "MainWindow", u"MainWindow", None))
-        self.GameBoard.setTitle(QCoreApplication.translate(
-            "MainWindow", u"Gameboard", None))
+        MainWindow.setWindowTitle(u"MainWindow")
+        self.GameBoard.setTitle(u"Gameboard")
         self.lblGameboard.setText("")
         self.btnWhite1.setText("")
         self.btnWhite2.setText("")
@@ -593,12 +594,10 @@ class Ui_MainWindow(object):
         self.btnBlack3.setText("")
         self.btnBlack4.setText("")
         self.btnBlack5.setText("")
-        self.lblDice1.setText(
-            QCoreApplication.translate("MainWindow", u"0", None))
-        self.btnRollDice.setText(QCoreApplication.translate(
-            "MainWindow", u"Roll Dice", None))
-        self.btnNewGame.setText(QCoreApplication.translate(
-            "MainWindow", u"New Game", None))
+        self.lblDice1.setText(u"")
+        self.btnRollDice.setText(u"Roll Dice")
+        self.btnPassTurn.setText(u"Pass Turn")
+        self.btnNewGame.setText(u"New Game")
         self.btn23.setText("")
         self.btn22.setText("")
         self.btn11.setText("")
@@ -619,14 +618,9 @@ class Ui_MainWindow(object):
         self.btn17.setText("")
         self.btn26.setText("")
         self.btn27.setText("")
-        self.lblDice2.setText(
-            QCoreApplication.translate("MainWindow", u"0", None))
-        self.lblDice3.setText(
-            QCoreApplication.translate("MainWindow", u"0", None))
-        self.lblTotalDice.setText(
-            QCoreApplication.translate("MainWindow", u"0", None))
-        self.lblTotal.setText(QCoreApplication.translate(
-            "MainWindow", u"Total:", None))
-        self.lblTurn.setText(QCoreApplication.translate(
-            "MainWindow", u"Turn of:", None))
+        self.lblDice2.setText(u"")
+        self.lblDice3.setText(u"")
+        self.lblTotalDice.setText(u"")
+        self.lblTotal.setText(u"")
+        self.lblTurn.setText(u"Turn of:")
     # retranslateUi

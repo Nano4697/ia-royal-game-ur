@@ -60,7 +60,12 @@ class AiAgent:
                     # child.set_next_turn()
 
                     if maximize:
-                        eval = self.minimax(child, depth, alpha, beta, True)
+                        if child.diceRollResult <= 2:
+                            eval = 0.75 * 5
+                        else:
+                            eval = 0.25 * 5
+
+                        eval += self.minimax(child, depth, alpha, beta, True)
                         # print("repeat turn", eval)
                     else:
                         eval = self.minimax(child, depth-1, alpha, beta, False)
@@ -87,7 +92,12 @@ class AiAgent:
                     # child.set_next_turn()
 
                     if minimize:
-                        eval = self.minimax(child, depth, alpha, beta, False)
+                        if child.diceRollResult <= 2:
+                            eval = 0.75 * 5
+                        else:
+                            eval = 0.25 * 5
+
+                        eval -= self.minimax(child, depth, alpha, beta, False)
                         # print("repeat turn", eval)
                     else:
                         eval = self.minimax(child, depth-1, alpha, beta,  True)
@@ -109,8 +119,14 @@ class AiAgent:
 
     def calculate_next_move(self, game, diceRoll):
         game_copy = copy.deepcopy(game)
+        game_copy.currentTurn = game.WHITE_TURN
 
         possible_moves = self.expand_board(game_copy, diceRoll, "black")
+
+        if len(possible_moves) == 0:
+            return -1
+        if len(possible_moves) == 1:
+            return possible_moves[0].currentBoard.getLastMove()
 
         best_move = 0
         value = 9999
@@ -139,8 +155,6 @@ class AiAgent:
 
         # print("chose value:", value)
         token = None
-        if len(possible_moves) == 0:
-            return -1
         return possible_moves[best_move-1].currentBoard.getLastMove()
 
     def evaluate_board(self, game):
