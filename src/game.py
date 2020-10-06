@@ -110,6 +110,7 @@ class Game:
         self.roll_dice()
         notifying(self.diceRollResult)
         self.calculate_possible_moves()
+        self.currentTurn = self.BLACK_TURN
 
         tokenToMove = self.aiAgent.calculate_next_move(
             self, self.diceRollResult)
@@ -119,35 +120,44 @@ class Game:
             print("no possible moves, skipping turn")
 
     def roll_dice(self):
-        randomValue = random.randint(0, 999)
+        # randomValue = random.randint(0, 999)
 
-        # check if result == 4
-        # probability of getting it = 1/8 -> 12.5 -> [0,125[
-        if 0 <= randomValue < 125:
-            self.diceRollResult = 4
-            print("Dice rolled: ", self.diceRollResult)
-            return 4
+        # # check if result == 4
+        # # probability of getting it = 1/8 -> 12.5 -> [0,125[
+        # if 0 <= randomValue < 125:
+        #     self.diceRollResult = 4
+        #     print("Dice rolled: ", self.diceRollResult)
+        #     return 4
 
-        # check if result == 2
-        # probability of getting it = 3/8 -> 37.5 -> [125,500[
-        elif 125 <= randomValue < 500:
-            self.diceRollResult = 2
-            print("Dice rolled: ", self.diceRollResult)
-            return 2
+        # # check if result == 2
+        # # probability of getting it = 3/8 -> 37.5 -> [125,500[
+        # elif 125 <= randomValue < 500:
+        #     self.diceRollResult = 2
+        #     print("Dice rolled: ", self.diceRollResult)
+        #     return 2
 
-        # check if result == 1
-        # probability of getting it = 3/8 -> 37.5 -> [500,875[
-        elif 500 <= randomValue < 875:
-            self.diceRollResult = 1
-            print("Dice rolled: ", self.diceRollResult)
-            return 1
+        # # check if result == 1
+        # # probability of getting it = 3/8 -> 37.5 -> [500,875[
+        # elif 500 <= randomValue < 875:
+        #     self.diceRollResult = 1
+        #     print("Dice rolled: ", self.diceRollResult)
+        #     return 1
 
-        # check if result == 3
-        # probability of getting it = 1/8 -> 12.5 -> [875,1000[
-        elif randomValue < 1000:
-            self.diceRollResult = 3
-            print("Dice rolled: ", self.diceRollResult)
-            return 3
+        # # check if result == 3
+        # # probability of getting it = 1/8 -> 12.5 -> [875,1000[
+        # elif randomValue < 1000:
+        #     self.diceRollResult = 3
+        #     print("Dice rolled: ", self.diceRollResult)
+        #     return 3
+        total = 0
+        for i in range(4):
+            total += random.randint(0, 1)
+        if total == 0:
+            total = 4
+
+        self.diceRollResult = total
+        print("Dice rolled: ", self.diceRollResult)
+        return total
 
     # receives one of the values of possibleMoves[] and makes the change which is the id of the
     # token to move or the code to add a new token to the board

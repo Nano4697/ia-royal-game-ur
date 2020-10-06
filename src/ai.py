@@ -60,20 +60,20 @@ class AiAgent:
                     # child.set_next_turn()
 
                     if maximize:
-                        if child.diceRollResult <= 2:
-                            eval = 0.75 * 5
-                        else:
-                            eval = 0.25 * 5
+                        # if child.diceRollResult <= 2:
+                        #     eval = 0.75 * 5
+                        # else:
+                        #     eval = 0.25 * 5
 
-                        eval += self.minimax(child, depth, alpha, beta, True)
+                        eval = self.minimax(child, depth, alpha, beta, True)
                         # print("repeat turn", eval)
                     else:
                         eval = self.minimax(child, depth-1, alpha, beta, False)
 
                     if child.diceRollResult <= 2:
-                        eval *= 0.75
+                        eval *= 0.375
                     else:
-                        eval *= 0.25
+                        eval *= 0.125
 
                     maxEval = max(maxEval, eval)
                     alpha = max(alpha, eval)
@@ -92,20 +92,20 @@ class AiAgent:
                     # child.set_next_turn()
 
                     if minimize:
-                        if child.diceRollResult <= 2:
-                            eval = 0.75 * 5
-                        else:
-                            eval = 0.25 * 5
+                        # if child.diceRollResult <= 2:
+                        #     eval = 0.75 * 5
+                        # else:
+                        #     eval = 0.25 * 5
 
-                        eval -= self.minimax(child, depth, alpha, beta, False)
+                        eval = self.minimax(child, depth, alpha, beta, False)
                         # print("repeat turn", eval)
                     else:
                         eval = self.minimax(child, depth-1, alpha, beta,  True)
 
                     if child.diceRollResult <= 2:
-                        eval *= 0.75
+                        eval *= 0.375
                     else:
-                        eval *= 0.25
+                        eval *= 0.125
 
                     minEval = min(minEval, eval)
                     beta = min(beta, eval)
@@ -129,28 +129,31 @@ class AiAgent:
             return possible_moves[0].currentBoard.getLastMove()
 
         best_move = 0
-        value = 9999
+        value = -9999
         alpha = -9999
         beta = 9999
         current_move = 0
+
+        depth = 1
         # print("------------- Calculating move - BEGIN ----------------")
         for move in possible_moves:
             if move.repeatTurn:
-                evaluation = self.minimax(move, 2, alpha, beta, True)
+                evaluation = self.minimax(move, depth+1, alpha, beta, True)
             else:
-                evaluation = self.minimax(move, 2, alpha, beta, False)
+                evaluation = self.minimax(move, depth, alpha, beta, False)
 
             # print("parent evaluation:", evaluation)
 
             # print("\t\t\t\t\tBoard value:", evaluation)
-
             if evaluation > value:
                 best_move = current_move
                 value = evaluation
+            print("value:", value)
 
             alpha = max(alpha, value)
 
             current_move += 1
+        print("final score:", value)
         # print("-------------- Calculating move - END -----------------")
 
         # print("chose value:", value)
@@ -161,35 +164,68 @@ class AiAgent:
         blackTokens = game.currentBoard.getBlackTokens()
         whiteTokens = game.currentBoard.getWhiteTokens()
 
+        farthest = 0
+
         sum = 0
 
         for token in blackTokens:
-            if token in game.ROSETTES and 5 <= token <= 12:
-                sum += 3
+            # if token == 8:
+            #     sum += 2
             if token == 15:
-                sum += 5
+                sum += 15
+            # elif token > 0:
+            #     sum += 1
+
+            elif token > 12:
+                sum += token + 3
+            elif token > 8:
+                sum += token + 2
+            elif token > 4:
+                sum += token + 1
+        #     if token == 8:
+        #         sum += 5
+        #     # farthest = token
+        #     # sum += (token/15) * 4
             sum += token
 
-        if game.currentTurn == game.BLACK_TURN and game.currentBoard.ateToken:
-            sum += 5
-        # # if game.currentTurn == game.BLACK_TURN and game.currentBoard.landedOnRosette:
-        # #     sum += 3
-        if game.currentTurn == game.BLACK_TURN and game.currentBoard.tokenExited:
-            sum += 10
+        # # sum += farthest
 
+        # if game.currentTurn == game.BLACK_TURN and game.currentBoard.ateToken:
+        #     sum += 3
+        # # # if game.currentTurn == game.BLACK_TURN and game.currentBoard.landedOnRosette:
+        # # #     sum += 3
+        # if game.currentTurn == game.BLACK_TURN and game.currentBoard.tokenExited:
+        #     sum += 10
+
+        farthest = 0
         for token in whiteTokens:
-            if token in game.ROSETTES and 5 <= token <= 12:
-                sum -= 3
+            # if token == 8:
+            #     sum -= 2
             if token == 15:
-                sum -= 5
+                sum -= 15
+            # elif token > 0:
+            #     sum -= 1
+
+            elif token > 12:
+                sum -= token - 3
+            elif token > 8:
+                sum -= token - 2
+            elif token > 4:
+                sum -= token - 1
+        #     if token == 8:
+        #         sum -= 5
+        #     # farthest = token
+        #     # sum -= (token/15) * 4
             sum -= token
 
-        if game.currentTurn == game.WHITE_TURN and game.currentBoard.ateToken:
-            sum -= 5
-        # if game.currentTurn == game.WHITE_TURN and game.currentBoard.landedOnRosette:
+        # # sum -= farthest
+
+        # if game.currentTurn == game.WHITE_TURN and game.currentBoard.ateToken:
         #     sum -= 3
-        if game.currentTurn == game.WHITE_TURN and game.currentBoard.tokenExited:
-            sum -= 10
+        # # if game.currentTurn == game.WHITE_TURN and game.currentBoard.landedOnRosette:
+        # #     sum -= 3
+        # if game.currentTurn == game.WHITE_TURN and game.currentBoard.tokenExited:
+        #     sum -= 10
 
         # if game.diceRollResult <= 2:
         #     sum *= 0.75
@@ -197,44 +233,3 @@ class AiAgent:
         #     sum *= 0.25
 
         return sum
-
-    # def evaluate_board(self, game):
-    #     blackTokens = game.currentBoard.getBlackTokens()
-    #     whiteTokens = game.currentBoard.getWhiteTokens()
-
-    #     sum = 0
-
-    #     for token in blackTokens:
-    #         # if token in game.ROSETTES:
-    #         #     sum += 3
-    #         if token == 15:
-    #             sum += 1
-    #         sum += token
-
-    #     # if game.currentTurn == game.BLACK_TURN and game.currentBoard.ateToken:
-    #     #     sum += 1
-    #     # # if game.currentTurn == game.BLACK_TURN and game.currentBoard.landedOnRosette:
-    #     # #     sum += 3
-    #     # if game.currentTurn == game.BLACK_TURN and game.currentBoard.tokenExited:
-    #     #     sum += 10
-
-    #     for token in whiteTokens:
-    #         #     # if token in game.ROSETTES:
-    #         #     #     sum -= 3
-    #         if token == 15:
-    #             sum -= 5
-    #         sum -= token
-
-    #     if game.currentTurn == game.WHITE_TURN and game.currentBoard.ateToken:
-    #         sum -= 5
-    #     # if game.currentTurn == game.WHITE_TURN and game.currentBoard.landedOnRosette:
-    #     #     sum -= 3
-    #     if game.currentTurn == game.WHITE_TURN and game.currentBoard.tokenExited:
-    #         sum -= 10
-
-    #     if game.diceRollResult <= 2:
-    #         sum *= 0.75
-    #     else:
-    #         sum *= 0.25
-
-    #     return -sum
