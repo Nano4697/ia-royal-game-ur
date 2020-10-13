@@ -138,19 +138,19 @@ class AiAgent:
         # print("------------- Calculating move - BEGIN ----------------")
         for move in possible_moves:
             if move.repeatTurn:
-                evaluation = self.minimax(move, depth+1, alpha, beta, True)
+                evaluation = self.minimax(move, depth+1, alpha, beta, not True)
             else:
-                evaluation = self.minimax(move, depth, alpha, beta, False)
+                evaluation = self.minimax(move, depth, alpha, beta, not False)
 
             # print("parent evaluation:", evaluation)
 
             # print("\t\t\t\t\tBoard value:", evaluation)
-            if evaluation > value:
+            if evaluation < value:
                 best_move = current_move
                 value = evaluation
             print("value:", value)
 
-            alpha = max(alpha, value)
+            beta = min(beta, value)
 
             current_move += 1
         print("final score:", value)
@@ -176,12 +176,12 @@ class AiAgent:
             # elif token > 0:
             #     sum += 1
 
-            elif token > 12:
-                sum += token + 3
-            elif token > 8:
-                sum += token + 2
-            elif token > 4:
-                sum += token + 1
+            # elif token > 12:
+            #     sum += token + 3
+            # elif token > 8:
+            #     sum += token + 2
+            # elif token > 4:
+            #     sum += token + 1
         #     if token == 8:
         #         sum += 5
         #     # farthest = token
@@ -206,12 +206,12 @@ class AiAgent:
             # elif token > 0:
             #     sum -= 1
 
-            elif token > 12:
-                sum -= token - 3
-            elif token > 8:
-                sum -= token - 2
-            elif token > 4:
-                sum -= token - 1
+            # elif token > 12:
+            #     sum -= token - 3
+            # elif token > 8:
+            #     sum -= token - 2
+            # elif token > 4:
+            #     sum -= token - 1
         #     if token == 8:
         #         sum -= 5
         #     # farthest = token
@@ -232,4 +232,4 @@ class AiAgent:
         # else:
         #     sum *= 0.25
 
-        return sum
+        return -sum
