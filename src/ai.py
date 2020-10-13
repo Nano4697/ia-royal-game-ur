@@ -138,19 +138,20 @@ class AiAgent:
         # print("------------- Calculating move - BEGIN ----------------")
         for move in possible_moves:
             if move.repeatTurn:
-                evaluation = self.minimax(move, depth+1, alpha, beta, not True)
+                evaluation = self.minimax(
+                    move, depth+1, alpha, beta, not False)
             else:
-                evaluation = self.minimax(move, depth, alpha, beta, not False)
+                evaluation = self.minimax(move, depth, alpha, beta, not True)
 
             # print("parent evaluation:", evaluation)
 
             # print("\t\t\t\t\tBoard value:", evaluation)
-            if evaluation < value:
+            if evaluation > value:
                 best_move = current_move
                 value = evaluation
             print("value:", value)
 
-            beta = min(beta, value)
+            alpha = max(alpha, value)
 
             current_move += 1
         print("final score:", value)
@@ -163,8 +164,6 @@ class AiAgent:
     def evaluate_board(self, game):
         blackTokens = game.currentBoard.getBlackTokens()
         whiteTokens = game.currentBoard.getWhiteTokens()
-
-        farthest = 0
 
         sum = 0
 
@@ -197,7 +196,6 @@ class AiAgent:
         # if game.currentTurn == game.BLACK_TURN and game.currentBoard.tokenExited:
         #     sum += 10
 
-        farthest = 0
         for token in whiteTokens:
             # if token == 8:
             #     sum -= 2
